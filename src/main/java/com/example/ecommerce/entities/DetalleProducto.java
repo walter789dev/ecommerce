@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Detalle extends Base{
+public class DetalleProducto extends Base{
     private int stock;
     private String color;
     private boolean estado;
