@@ -14,5 +14,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class DetalleOrdenCompra extends Base {
+
+
     private int cantidad;
 }

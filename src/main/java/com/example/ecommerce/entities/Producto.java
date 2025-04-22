@@ -1,5 +1,6 @@
 package com.example.ecommerce.entities;
 
+import com.example.ecommerce.entities.enums.TipoProducto;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -16,4 +17,5 @@ import lombok.NoArgsConstructor;
 public class Producto extends Base {
     private String nombre;
     private String sexo;
+    private TipoProducto tipoProducto;
 }
