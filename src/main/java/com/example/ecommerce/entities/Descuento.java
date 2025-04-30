@@ -16,7 +16,9 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Descuento extends Base {
+    private String nombre;
     private Date fechaInicio;
     private Date fechaFin;
-    private int cantidad;
+    private String descripcion;
+    private double porcentaje;
 }

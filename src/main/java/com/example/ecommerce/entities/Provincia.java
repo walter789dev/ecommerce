@@ -1,27 +1,24 @@
 package com.example.ecommerce.entities;
 
-import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jdk.jfr.Enabled;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
-
 @EqualsAndHashCode(callSuper = true)
-@Entity
-@Table(name = "ordenes_compras")
+@Enabled
+@Table(name = "provincias")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class OrdenCompra extends Base {
-    @ManyToOne
-    @JoinColumn(name = "id_usuario")
-    private Usuario usuario;
+public class Provincia extends Base{
+    private String nombre;
 
-    private Date fecha_compra;
-    private double total;
+    @ManyToOne
+    @JoinColumn(name = "id_pais")
+    private Pais pais;
 }

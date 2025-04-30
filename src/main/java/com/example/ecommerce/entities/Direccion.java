@@ -1,6 +1,8 @@
 package com.example.ecommerce.entities;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,8 +16,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Direccion extends Base {
-    private String pais;
-    private String provincia;
-    private String departamento;
-    private String localidad;
+    private String calle;
+    private int numeroCalle;
+    private int codigoPostal;
+
+    @ManyToOne
+    @JoinColumn(name = "id_localidad")
+    private Localidad localidad;
 }

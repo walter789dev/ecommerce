@@ -13,11 +13,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PrecioProducto extends Base {
+    private double precio_compra;
     private double precio_venta;
-
-    @OneToOne
-    @JoinColumn(name = "id_detalleProducto", unique = true)
-    private DetalleProducto detalleProducto;
 
     @ManyToOne
     @JoinColumn(name = "id_descuento")
