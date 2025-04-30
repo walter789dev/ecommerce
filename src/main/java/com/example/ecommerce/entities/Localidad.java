@@ -9,19 +9,16 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
-
 @EqualsAndHashCode(callSuper = true)
 @Entity
-@Table(name = "ordenes_compras")
+@Table(name = "localidades")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class OrdenCompra extends Base {
-    @ManyToOne
-    @JoinColumn(name = "id_usuario")
-    private Usuario usuario;
+public class Localidad extends Base{
+    private String nombre;
 
-    private Date fecha_compra;
-    private double total;
+    @ManyToOne
+    @JoinColumn(name = "id_provincia")
+    private Provincia provincia;
 }
