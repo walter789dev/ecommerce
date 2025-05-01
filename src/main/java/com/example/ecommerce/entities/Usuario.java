@@ -1,10 +1,7 @@
 package com.example.ecommerce.entities;
 
 import com.example.ecommerce.entities.enums.Rol;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -21,6 +18,8 @@ public class Usuario extends Base {
     private String email;
     private String contrasenia;
     private int dni;
+
+    @Enumerated(EnumType.STRING)
     private Rol rol;
 
     @ManyToOne

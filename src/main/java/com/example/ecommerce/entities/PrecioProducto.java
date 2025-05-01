@@ -15,8 +15,4 @@ import lombok.NoArgsConstructor;
 public class PrecioProducto extends Base {
     private double precio_compra;
     private double precio_venta;
-
-    @ManyToOne
-    @JoinColumn(name = "id_descuento")
-    private Descuento descuento;
 }
