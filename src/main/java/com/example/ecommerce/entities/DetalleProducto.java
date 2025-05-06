@@ -10,7 +10,7 @@ import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
-@Table(name = "detalles")
+@Table(name = "detalles_productos")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -27,9 +27,9 @@ public class DetalleProducto extends Base{
     @JoinColumn(name = "id_talle")
     private Talle talle;
 
-    @OneToOne
-    @JoinColumn(name = "id_precio")
-    private PrecioProducto precio;
+    @ManyToOne
+    @JoinColumn(name = "id_descuento")
+    private Descuento descuento;
 
     @OneToMany
     @JoinColumn(name = "id_imagen")

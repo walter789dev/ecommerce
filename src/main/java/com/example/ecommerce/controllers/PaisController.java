@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(name = "paises")
+@RequestMapping("/paises")
 public class PaisController extends BaseController<Pais, Long>{
     public PaisController(PaisService paisService){
         super(paisService);
