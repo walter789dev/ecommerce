@@ -1,12 +1,7 @@
 package com.example.ecommerce.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.*;
+import lombok.*;
 
 import java.util.List;
 
@@ -16,9 +11,15 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Categoria extends Base {
     private String nombre;
 
-    @ManyToMany(mappedBy = "categorias")
+    @ManyToMany
+    @JoinTable(
+            name = "productos_categorias",
+            joinColumns = @JoinColumn(name = "id_producto"),
+            inverseJoinColumns = @JoinColumn(name = "id_categoria")
+    )
     private List<Producto> productos;
 }

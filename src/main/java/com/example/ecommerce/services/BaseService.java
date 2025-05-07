@@ -39,7 +39,7 @@ public abstract class BaseService<E extends Base, ID extends Serializable> {
         }
     }
 
-    public E update(E entity, Long id) throws Exception{
+    public E update(E entity) throws Exception{
         try {
             return baseRepository.save(entity);
         } catch (Exception e) {

@@ -22,7 +22,7 @@ public class LocalidadController extends BaseController<Localidad, Long>{
         super(localidadService);
     }
 
-    @GetMapping("/provincia/{idProvincia")
+    @GetMapping("/provincia/{idProvincia}")
     public ResponseEntity<List<Localidad>> findAllByProvincia(@PathVariable Long idProvincia){
         try {
             List<Localidad> localidades = localidadService.findAllByProvincia(idProvincia);
