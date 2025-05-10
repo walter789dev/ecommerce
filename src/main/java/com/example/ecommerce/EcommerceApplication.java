@@ -108,20 +108,20 @@ public class EcommerceApplication {
 
             // --------------- Usuarios ------------------- //
             Usuario usuario1 = Usuario.builder()
-                    .nombre("Roberto").apellido("Carlos").dni(467890123).rol(Rol.USUARIO)
-                    .email("correo@gmail.com").contrasenia("sdsdsdsd")
+                    .username("Roberto").apellido("Carlos").dni(467890123).rol(Rol.USUARIO)
+                    .email("correo@gmail.com").password("sdsdsdsd")
                     .direccion(direccion_mendoza).build();
             Usuario usuario2 = Usuario.builder()
-                    .nombre("Rodrigo").apellido("Mora").dni(34789123).rol(Rol.USUARIO)
-                    .email("correo2@gmail.com").contrasenia("contraseña")
+                    .username("Rodrigo").apellido("Mora").dni(34789123).rol(Rol.USUARIO)
+                    .email("correo2@gmail.com").password("contraseña")
                     .direccion(direccion_cordoba).build();
             Usuario usuario3 = Usuario.builder()
-                    .nombre("Esteban").apellido("Quito").dni(56777903).rol(Rol.USUARIO)
-                    .email("esteban34@gmail.com").contrasenia("estebanquito")
+                    .username("Esteban").apellido("Quito").dni(56777903).rol(Rol.USUARIO)
+                    .email("esteban34@gmail.com").password("estebanquito")
                     .direccion(direccion_santa_fe).build();
             Usuario admin1 = Usuario.builder()
-                    .nombre("Ernesto").apellido("Sabato").dni(24789123).rol(Rol.ADMIN)
-                    .email("eladmin123@gmail.com").contrasenia("adminquebuentipo")
+                    .username("Ernesto").apellido("Sabato").dni(24789123).rol(Rol.ADMIN)
+                    .email("eladmin123@gmail.com").password("adminquebuentipo")
                     .direccion(direccion_mendoza).build();
 
             usuarioRepository.save(usuario1);
@@ -155,6 +155,7 @@ public class EcommerceApplication {
             productoRepository.save(producto2);
             productoRepository.save(producto3);
             productoRepository.save(producto4);
+            productoRepository.save(producto5);
 
             // -------------- Categoria ----------------- //
             Categoria running = Categoria.builder().nombre("Running")
@@ -189,7 +190,7 @@ public class EcommerceApplication {
                     .fechaInicio(LocalDate.of(2025, 5, 10))
                     .fechaFin(LocalDate.of(2025, 5, 20))
                     .porcentaje(0.5).build();
-            Descuento descuento10 = Descuento.builder()
+            Descuento descuento10 = Descuento.builder().nombre("10%")
                     .fechaInicio(LocalDate.of(2025, 6, 1))
                     .fechaFin(LocalDate.of(2025, 6, 10))
                     .porcentaje(0.1).build();
@@ -198,9 +199,6 @@ public class EcommerceApplication {
             descuentoRepository.save(descuento50);
 
             // ------------------ Detalle Producto ------------------ //
-
-
-
         };
     }
 

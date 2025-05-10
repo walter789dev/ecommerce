@@ -11,7 +11,5 @@ public interface DetalleProductoRepository extends BaseRepository<DetalleProduct
 
     List<DetalleProducto> findAllByProductoId(Long idProducto);
 
-    List<DetalleProducto> findAllByTalleId(Long idTalle);
-
     List<DetalleProducto> findAllByDescuentoId(Long idDescuento);
 }

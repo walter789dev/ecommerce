@@ -13,17 +13,12 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 public class DetalleProducto extends Base{
-    private int stock;
     private String color;
-    private boolean estado;
+    private boolean activo;
 
     @ManyToOne
     @JoinColumn(name = "id_producto")
     private Producto producto;
-
-    @ManyToOne
-    @JoinColumn(name = "id_talle")
-    private Talle talle;
 
     @ManyToOne
     @JoinColumn(name = "id_descuento")
