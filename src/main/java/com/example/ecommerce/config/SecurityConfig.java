@@ -4,6 +4,7 @@ import com.example.ecommerce.jwt.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -16,7 +17,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfig {
-
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
     private final AuthenticationProvider authProvider;
 
@@ -30,6 +30,9 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authRequest ->
                         authRequest // 2
                                 .requestMatchers("/auth/**").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/detalles_productos").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/categorias").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/talles").permitAll()
                                 .anyRequest().authenticated())
                 // Autenticación basada en jwt. No utilize la de Spring Security
                 .sessionManagement(sessionManager ->

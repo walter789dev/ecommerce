@@ -11,8 +11,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.awt.*;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
@@ -44,6 +46,8 @@ public class EcommerceApplication {
     private OrdenCompraRepository ordenCompraRepository;
     @Autowired
     private DetalleOrdenCompraController detalleOrdenCompraController;
+    @Autowired
+    private ImagenRepository imagenRepository;
 
     @Bean
     @Transactional
@@ -54,6 +58,7 @@ public class EcommerceApplication {
                            UsuarioRepository usuarioRepository,
                            ProductoRepository productoRepository,
                            DetalleProductoRepository detalleProductoRepository,
+                           ImagenRepository imagenRepository,
                            CategoriaRepository categoriaRepository,
                            DescuentoRepository descuentoRepository,
                            TalleRepository talleRepository,
@@ -108,20 +113,20 @@ public class EcommerceApplication {
 
             // --------------- Usuarios ------------------- //
             Usuario usuario1 = Usuario.builder()
-                    .username("Roberto").apellido("Carlos").dni(467890123).rol(Rol.USUARIO)
-                    .email("correo@gmail.com").password("sdsdsdsd")
+                    .nombre("Roberto").apellido("Carlos").dni(467890123).rol(Rol.USUARIO)
+                    .username("correo@gmail.com").password("sdsdsdsd")
                     .direccion(direccion_mendoza).build();
             Usuario usuario2 = Usuario.builder()
-                    .username("Rodrigo").apellido("Mora").dni(34789123).rol(Rol.USUARIO)
-                    .email("correo2@gmail.com").password("contraseña")
+                    .nombre("Rodrigo").apellido("Mora").dni(34789123).rol(Rol.USUARIO)
+                    .username("correo2@gmail.com").password("contraseña")
                     .direccion(direccion_cordoba).build();
             Usuario usuario3 = Usuario.builder()
-                    .username("Esteban").apellido("Quito").dni(56777903).rol(Rol.USUARIO)
-                    .email("esteban34@gmail.com").password("estebanquito")
+                    .nombre("Esteban").apellido("Quito").dni(56777903).rol(Rol.USUARIO)
+                    .username("esteban34@gmail.com").password("estebanquito")
                     .direccion(direccion_santa_fe).build();
             Usuario admin1 = Usuario.builder()
-                    .username("Ernesto").apellido("Sabato").dni(24789123).rol(Rol.ADMIN)
-                    .email("eladmin123@gmail.com").password("adminquebuentipo")
+                    .nombre("Ernesto").apellido("Sabato").dni(24789123).rol(Rol.ADMIN)
+                    .username("eladmin123@gmail.com").password("adminquebuentipo")
                     .direccion(direccion_mendoza).build();
 
             usuarioRepository.save(usuario1);
@@ -131,25 +136,25 @@ public class EcommerceApplication {
 
             // ----------------- Productos ------------------ //
             Producto producto1 = Producto.builder()
-                    .nombre("Zapatillas PUMA x TORTUGAS NINJA Suede").tipoProducto(TipoProducto.CALZADO)
-                    .sexo(Sexo.HOMBRE).precio_compra(190000)
-                    .precio_venta(210000).build();
+                    .nombre("Zapatillas Speedcat OG").tipoProducto(TipoProducto.CALZADO)
+                    .sexo(Sexo.HOMBRE).precio_compra(160000)
+                    .precio_venta(180000).build();
             Producto producto2 = Producto.builder()
-                    .nombre("Zapatillas Ever FS CV").tipoProducto(TipoProducto.CALZADO)
-                    .sexo(Sexo.MUJER).precio_compra(90000)
-                    .precio_venta(95000).build();
+                    .nombre("Zapatillas PUMA x HELLO KITTY Suede XL").tipoProducto(TipoProducto.CALZADO)
+                    .sexo(Sexo.MUJER).precio_compra(19000)
+                    .precio_venta(200000).build();
             Producto producto3 = Producto.builder()
-                    .nombre("Campera acolchada").tipoProducto(TipoProducto.ROPA)
-                    .sexo(Sexo.HOMBRE).precio_compra(230000)
-                    .precio_venta(260000).build();
+                    .nombre("Buzo WARDROBE Essentials").tipoProducto(TipoProducto.ROPA)
+                    .sexo(Sexo.HOMBRE).precio_compra(8000)
+                    .precio_venta(90000).build();
             Producto producto4 = Producto.builder()
-                    .nombre("Crop top PUMA STRONG").tipoProducto(TipoProducto.ROPA)
-                    .sexo(Sexo.MUJER).precio_compra(50000)
-                    .precio_venta(55000).build();
+                    .nombre("Campera puffer oversize").tipoProducto(TipoProducto.ROPA)
+                    .sexo(Sexo.MUJER).precio_compra(310000)
+                    .precio_venta(330000).build();
             Producto producto5 = Producto.builder()
-                    .nombre("Botines Puma 90").tipoProducto(TipoProducto.CALZADO)
-                    .sexo(Sexo.HOMBRE).precio_compra(60000)
-                    .precio_venta(650000).build();
+                    .nombre("Botines de fútbol FUTURE 8 ULTIMATE MxSG").tipoProducto(TipoProducto.CALZADO)
+                    .sexo(Sexo.HOMBRE).precio_compra(330000)
+                    .precio_venta(350000).build();
 
             productoRepository.save(producto1);
             productoRepository.save(producto2);
@@ -198,7 +203,76 @@ public class EcommerceApplication {
             descuentoRepository.save(descuento10);
             descuentoRepository.save(descuento50);
 
-            // ------------------ Detalle Producto ------------------ //
+            // ------------------ Imagenes ------------------ //
+            Imagen imagen1 = Imagen.builder()
+                    .url("https://res.cloudinary.com/dk93fowya/image/upload/v1746976155/speedcat_qvh3gy.jpg")
+                    .alt("Zapatilla Speedcat OG color negro").build();
+            Imagen imagen2 = Imagen.builder()
+                    .url("https://res.cloudinary.com/dk93fowya/image/upload/v1746976155/speedcat-2_qombn0.jpg")
+                    .alt("Zapatilla Speedcat OG color negro").build();
+            Imagen imagen3 = Imagen.builder()
+                    .url("https://res.cloudinary.com/dk93fowya/image/upload/v1746977987/hello_kitty_zepctk.jpg")
+                    .alt("Zapatillas PUMA x HELLO KITTY color negro").build();
+            Imagen imagen4 = Imagen.builder()
+                    .url("https://res.cloudinary.com/dk93fowya/image/upload/v1746977986/hello_kitty-2_ezmxie.jpg")
+                    .alt("Zapatillas PUMA x HELLO KITTY color negro").build();
+            Imagen imagen5 = Imagen.builder()
+                    .url("https://res.cloudinary.com/dk93fowya/image/upload/v1746979624/wardrobe-1_itzkxm.jpg")
+                    .alt("Buzo WARDROBE Essentials color negro").build();
+            Imagen imagen6 = Imagen.builder()
+                    .url("https://res.cloudinary.com/dk93fowya/image/upload/v1746979624/wardrobe_sntpop.jpg")
+                    .alt("Buzo WARDROBE Essentials color negro").build();
+            Imagen imagen7 = Imagen.builder()
+                    .url("https://res.cloudinary.com/dk93fowya/image/upload/v1746980439/puffer_ddt91y.jpg")
+                    .alt("Campera puffer oversize color beige").build();
+            Imagen imagen8 = Imagen.builder()
+                    .url("https://res.cloudinary.com/dk93fowya/image/upload/v1746980439/puffer-1_li1jwt.jpg")
+                    .alt("Campera puffer oversize color beige").build();
+            Imagen imagen9 = Imagen.builder()
+                    .url("https://res.cloudinary.com/dk93fowya/image/upload/v1746980888/future_8_ultimate-1_eylmr1.jpg")
+                    .alt("Botines de fútbol FUTURE 8 ULTIMATE").build();
+            Imagen imagen10 = Imagen.builder()
+                    .url("https://res.cloudinary.com/dk93fowya/image/upload/v1746980887/future_8_ultimate_k8wrhd.jpg")
+                    .alt("Botines de fútbol FUTURE 8 ULTIMATE").build();
+
+            imagenRepository.save(imagen1);
+            imagenRepository.save(imagen2);
+            imagenRepository.save(imagen3);
+            imagenRepository.save(imagen4);
+            imagenRepository.save(imagen5);
+            imagenRepository.save(imagen6);
+            imagenRepository.save(imagen7);
+            imagenRepository.save(imagen8);
+            imagenRepository.save(imagen9);
+            imagenRepository.save(imagen10);
+
+            // ----------------------- Detalle Producto --------------- //
+            DetalleProducto speedcat_negro = DetalleProducto.builder()
+                    .color("Negro").activo(true)
+                    .producto(producto1).descuento(descuento10)
+                    .imagenes(List.of(imagen1, imagen2)).build();
+            DetalleProducto hello_kitty = DetalleProducto.builder()
+                    .color("Negro").activo(true)
+                    .producto(producto2).descuento(descuento10)
+                    .imagenes(List.of(imagen3, imagen4)).build();
+            DetalleProducto buzo_wardrobe = DetalleProducto.builder()
+                    .color("Negro").activo(true)
+                    .producto(producto3).descuento(descuento50)
+                    .imagenes(List.of(imagen5, imagen6)).build();
+            DetalleProducto campera_puffer = DetalleProducto.builder()
+                    .color("Beige").activo(true)
+                    .producto(producto4).descuento(descuento10)
+                    .imagenes(List.of(imagen7, imagen8)).build();
+            DetalleProducto botines_future = DetalleProducto.builder()
+                    .color("Amarillo").activo(true)
+                    .producto(producto5).descuento(descuento10)
+                    .imagenes(List.of(imagen9, imagen10)).build();
+
+            detalleProductoRepository.save(speedcat_negro);
+            detalleProductoRepository.save(hello_kitty);
+            detalleProductoRepository.save(buzo_wardrobe);
+            detalleProductoRepository.save(campera_puffer);
+            detalleProductoRepository.save(botines_future);
         };
     }
 

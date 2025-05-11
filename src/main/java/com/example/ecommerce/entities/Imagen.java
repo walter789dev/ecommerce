@@ -1,8 +1,6 @@
 package com.example.ecommerce.entities;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.*;
 
@@ -16,8 +14,4 @@ import lombok.*;
 public class Imagen extends Base{
     private String url;
     private String alt;
-
-    @ManyToOne
-    @JoinColumn(name = "id_detalleProducto")
-    private DetalleProducto detalleProducto;
 }

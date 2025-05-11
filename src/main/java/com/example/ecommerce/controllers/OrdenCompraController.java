@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/ordenes_compra")
+@RequestMapping("/api/v1/ordenes_compras")
 public class OrdenCompraController extends BaseController<OrdenCompra, Long>{
     public OrdenCompraController(OrdenCompraService ordenCompraService){
         super(ordenCompraService);

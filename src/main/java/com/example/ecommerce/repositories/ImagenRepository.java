@@ -7,5 +7,4 @@ import java.util.List;
 
 @Repository
 public interface ImagenRepository extends BaseRepository<Imagen, Long>{
-    List<Imagen> findAllByDetalleProductoId(Long idDetalleProducto);
 }

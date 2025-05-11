@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/categorias")
+@RequestMapping("/api/v1/categorias")
 public class CategoriaController extends BaseController<Categoria, Long>{
     public CategoriaController(CategoriaService categoriaService){
         super(categoriaService);

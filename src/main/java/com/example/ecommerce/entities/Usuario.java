@@ -12,21 +12,19 @@ import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
-@Table(name = "usuarios", uniqueConstraints = {@UniqueConstraint(columnNames = {"email"})})
+@Table(name = "usuarios", uniqueConstraints = {@UniqueConstraint(columnNames = {"username"})})
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 public class Usuario extends Base implements UserDetails {
-    @Column(name = "nombre")
-    private String username;
-
+    private String nombre;
     private String apellido;
     private String password;
     private int dni;
 
     @Column(nullable = false)
-    private String email;
+    private String username;
 
     @Enumerated(EnumType.STRING)
     private Rol rol;

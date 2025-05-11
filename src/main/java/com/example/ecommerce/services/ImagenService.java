@@ -16,12 +16,4 @@ public class ImagenService extends BaseService<Imagen, Long>{
     public ImagenService(ImagenRepository imagenRepository){
         super(imagenRepository);
     }
-
-    public List<Imagen> findAllByDetalleProducto(Long idDetalleProducto) throws Exception {
-        try {
-            return imagenRepository.findAllByDetalleProductoId(idDetalleProducto);
-        }catch (Exception e){
-            throw new Exception("No se han encontrado imagenes del producto", e);
-        }
-    }
 }

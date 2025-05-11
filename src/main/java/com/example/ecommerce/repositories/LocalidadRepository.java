@@ -8,4 +8,6 @@ import java.util.List;
 @Repository
 public interface LocalidadRepository extends BaseRepository<Localidad, Long>{
     List<Localidad> findAllByProvinciaId(Long id);
+
+    Localidad findByNombre(String nombre);
 }

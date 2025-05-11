@@ -25,6 +25,6 @@ public class DetalleProducto extends Base{
     private Descuento descuento;
 
     @OneToMany
-    @JoinColumn(name = "id_imagen")
+    @JoinColumn(name = "id_detalle_producto")
     private List<Imagen> imagenes;
 }
