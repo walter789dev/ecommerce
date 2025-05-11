@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/provincias")
+@RequestMapping("/api/v1/provincias")
 public class ProvinciaController extends BaseController<Provincia, Long>{
 
     @Autowired

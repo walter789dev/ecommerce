@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/direcciones")
+@RequestMapping("/api/v1/direcciones")
 public class DireccionController extends BaseController<Direccion, Long>{
 
     @Autowired

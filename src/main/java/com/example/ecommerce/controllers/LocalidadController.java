@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/localidades")
+@RequestMapping("/api/v1/localidades")
 public class LocalidadController extends BaseController<Localidad, Long>{
 
     @Autowired

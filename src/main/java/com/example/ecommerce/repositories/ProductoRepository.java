@@ -10,11 +10,9 @@ import java.util.List;
 
 @Repository
 public interface ProductoRepository extends BaseRepository<Producto, Long>{
-    List<Producto> findByCategoriasId(Long idCategoria);
-
     List<Producto> findAllBySexo(String sexo);
 
-    @Query("SELECT p FROM Producto p WHERE p.precio.precio_venta BETWEEN :minPrice AND :maxPrice")
+    @Query("SELECT p FROM Producto p WHERE p.precio_venta BETWEEN :minPrice AND :maxPrice")
     List<Producto> findAllByPrecioBetween(@Param("minPrice") Double minPrice, @Param("maxPrice") Double maxPrice);
 
     List<Producto> findAllByTipoProducto(TipoProducto tipoProducto);
