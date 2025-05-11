@@ -1,9 +1,12 @@
 package com.example.ecommerce.services;
 
+import com.example.ecommerce.dto.ProductFilterDTO;
 import com.example.ecommerce.entities.DetalleProducto;
+import com.example.ecommerce.entities.Producto;
 import com.example.ecommerce.entities.enums.Sexo;
 import com.example.ecommerce.entities.enums.TipoProducto;
 import com.example.ecommerce.repositories.DetalleProductoRepository;
+import com.example.ecommerce.specification.ProductSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

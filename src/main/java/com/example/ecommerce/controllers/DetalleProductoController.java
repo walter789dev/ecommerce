@@ -1,5 +1,6 @@
 package com.example.ecommerce.controllers;
 
+import com.example.ecommerce.dto.ProductFilterDTO;
 import com.example.ecommerce.entities.DetalleProducto;
 import com.example.ecommerce.entities.enums.Sexo;
 import com.example.ecommerce.entities.enums.TipoProducto;

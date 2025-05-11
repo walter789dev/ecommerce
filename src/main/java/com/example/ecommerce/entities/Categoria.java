@@ -15,11 +15,6 @@ import java.util.List;
 public class Categoria extends Base {
     private String nombre;
 
-    @ManyToMany
-    @JoinTable(
-            name = "productos_categorias",
-            joinColumns = @JoinColumn(name = "id_producto"),
-            inverseJoinColumns = @JoinColumn(name = "id_categoria")
-    )
+    @ManyToMany(mappedBy = "productos")
     private List<Producto> productos;
 }
