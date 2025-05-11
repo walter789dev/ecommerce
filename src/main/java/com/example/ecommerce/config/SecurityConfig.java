@@ -29,10 +29,11 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable) // 1
                 .authorizeHttpRequests(authRequest ->
                         authRequest // 2
-                                .requestMatchers("/auth/**").permitAll()
-                                .requestMatchers(HttpMethod.GET, "/detalles_productos").permitAll()
-                                .requestMatchers(HttpMethod.GET, "/categorias").permitAll()
-                                .requestMatchers(HttpMethod.GET, "/talles").permitAll()
+                                .requestMatchers("/api/v1/auth/**").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/api/v1/detalles_productos").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/api/v1/detalles_productos/**").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/api/v1/categorias").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/api/v1/talles").permitAll()
                                 .anyRequest().authenticated())
                 // Autenticación basada en jwt. No utilize la de Spring Security
                 .sessionManagement(sessionManager ->
