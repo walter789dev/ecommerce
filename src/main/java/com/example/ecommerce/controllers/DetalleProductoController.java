@@ -52,4 +52,11 @@ public class DetalleProductoController extends BaseController<DetalleProducto, L
             return ResponseEntity.status(404).body(null);
         }
     }
+
+    //Recibe los criterios de filtro o para filtrar.
+    @PostMapping("/filtrar")
+    public ResponseEntity<List<DetalleProducto>> filtrarProductos(@RequestBody ProductFilterDTO filtros) {
+        List<DetalleProducto> productosFiltrados = detalleProductoService.getAllProductsFilter(filtros);
+        return ResponseEntity.ok(productosFiltrados);
+    }
 }

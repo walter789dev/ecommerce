@@ -29,4 +29,9 @@ public class DetalleProductoService extends BaseService<DetalleProducto, Long>{
     public List<DetalleProducto> getAllDetallesBySexo(Sexo sexo) {
         return detalleProductoRepository.findAllByProductoSexo(sexo);
     }
+
+    public List<DetalleProducto> getAllProductsFilter(ProductFilterDTO filtrosDTO) {
+        ProductSpecification productSpec = new ProductSpecification(filtrosDTO);
+        return detalleProductoRepository.findAll(productSpec);
+    }
 }
