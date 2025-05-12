@@ -5,6 +5,7 @@ import com.example.ecommerce.entities.enums.TipoProducto;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
