@@ -39,6 +39,11 @@ public class DetalleProductoController extends BaseController<DetalleProducto, L
      *         }
      *     }
      */
+    @GetMapping("/producto/{id}")
+    public ResponseEntity<List<DetalleProducto>> getDetallesPorProducto(@PathVariable Long id) {
+        List<DetalleProducto> detalles = detalleProductoService.findByProductoId(id);
+        return ResponseEntity.ok(detalles);
+    }
 
     // Ver los productos del sexo pertinente de acuerdo al catálogo seleccionado.
     @GetMapping("/catalogo/{sexoStr}")

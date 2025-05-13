@@ -32,13 +32,16 @@ public class SecurityConfig {
         //2 - Establece como publicas las rutas de auth, las demás requieren autenticación.
         return http
                 .csrf(AbstractHttpConfigurer::disable) // 1
+                .cors(cors -> cors.configurationSource(corsConfigurationSource())) // Habilita el uso de corsConfigurationSource()
                 .authorizeHttpRequests(authRequest ->
                         authRequest // 2
                                 .requestMatchers("/api/v1/auth/**").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/api/v1/productos").permitAll()
                                 .requestMatchers(HttpMethod.GET, "/api/v1/detalles_productos").permitAll()
                                 .requestMatchers(HttpMethod.GET, "/api/v1/detalles_productos/**").permitAll()
                                 .requestMatchers(HttpMethod.GET, "/api/v1/categorias").permitAll()
                                 .requestMatchers(HttpMethod.GET, "/api/v1/talles").permitAll()
+
                                 .anyRequest().authenticated())
                 // Autenticación basada en jwt. No utilize la de Spring Security
                 .sessionManagement(sessionManager ->

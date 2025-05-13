@@ -3,6 +3,7 @@ package com.example.ecommerce.repositories;
 import com.example.ecommerce.entities.DetalleProducto;
 import com.example.ecommerce.entities.enums.Sexo;
 import com.example.ecommerce.entities.enums.TipoProducto;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -14,8 +15,8 @@ import java.util.List;
 public interface DetalleProductoRepository extends BaseRepository<DetalleProducto, Long>, JpaSpecificationExecutor<DetalleProducto>
 {
     List<DetalleProducto> findAllByColor(String color);
-
-    List<DetalleProducto> findAllByProductoId(Long idProducto);
+    @EntityGraph(attributePaths = {"imagenes", "producto", "descuento"})
+    List<DetalleProducto> findByProductoId(Long idProducto);
 
     List<DetalleProducto> findAllByDescuentoId(Long idDescuento);
 

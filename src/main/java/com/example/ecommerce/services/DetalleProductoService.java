@@ -30,8 +30,13 @@ public class DetalleProductoService extends BaseService<DetalleProducto, Long>{
         return detalleProductoRepository.findAllByProductoSexo(sexo);
     }
 
+    public List<DetalleProducto> findByProductoId(Long productoId) {
+        return detalleProductoRepository.findByProductoId(productoId);
+    }
+
     public List<DetalleProducto> getAllProductsFilter(ProductFilterDTO filtrosDTO) {
         ProductSpecification productSpec = new ProductSpecification(filtrosDTO);
         return detalleProductoRepository.findAll(productSpec);
     }
+
 }
