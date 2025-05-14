@@ -14,10 +14,6 @@ public class Stock extends Base{
     private int stock;
 
     @ManyToOne
-    @JoinColumn(name = "id_detalle_producto")
-    private DetalleProducto detalleProducto;
-
-    @ManyToOne
     @JoinColumn(name = "id_talle")
     private Talle talle;
 }

@@ -5,6 +5,9 @@ import com.example.ecommerce.entities.enums.TipoProducto;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "productos")
@@ -23,4 +26,12 @@ public class Producto extends Base {
 
     @Enumerated(EnumType.STRING)
     private TipoProducto tipoProducto;
+
+    @ManyToMany
+    @JoinTable(
+            name = "productos_categorias",
+            joinColumns = @JoinColumn(name = "id_producto"),
+            inverseJoinColumns = @JoinColumn(name = "id_categoria")
+    )
+    private List<Categoria> categorias;
 }

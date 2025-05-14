@@ -3,8 +3,6 @@ package com.example.ecommerce.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.List;
-
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "categorias")
@@ -14,12 +12,4 @@ import java.util.List;
 @Builder
 public class Categoria extends Base {
     private String nombre;
-
-    @ManyToMany
-    @JoinTable(
-            name = "productos_categorias",
-            joinColumns = @JoinColumn(name = "id_producto"),
-            inverseJoinColumns = @JoinColumn(name = "id_categoria")
-    )
-    private List<Producto> productos;
 }

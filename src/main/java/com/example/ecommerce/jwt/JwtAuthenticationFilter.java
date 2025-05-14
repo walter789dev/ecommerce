@@ -42,7 +42,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter { // # Para cr
 
         // Verifica si el usuario (session supongo) existe en el contento de Spring
         if (email != null && SecurityContextHolder.getContext().getAuthentication() == null){
-            UserDetails userDetails = userDetailsService.loadUserByUsername(token);
+            UserDetails userDetails = userDetailsService.loadUserByUsername(email);
             if (jwtService.isTokenValid(token, userDetails)){
                 // Crea la autenticación para dicho usuario.
                 UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
