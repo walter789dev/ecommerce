@@ -1,8 +1,6 @@
 package com.example.ecommerce.repositories;
 
 import com.example.ecommerce.entities.DetalleProducto;
-import com.example.ecommerce.entities.enums.Sexo;
-import com.example.ecommerce.entities.enums.TipoProducto;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -13,20 +11,6 @@ import java.util.List;
 @Repository
 public interface DetalleProductoRepository extends BaseRepository<DetalleProducto, Long>, JpaSpecificationExecutor<DetalleProducto>
 {
-    List<DetalleProducto> findAllByColor(String color);
-
-    List<DetalleProducto> findAllByProductoId(Long idProducto);
-
-    List<DetalleProducto> findAllByDescuentoId(Long idDescuento);
-
-    @Query("SELECT dp FROM DetalleProducto dp JOIN dp.producto p WHERE p.sexo = :sexo AND p.tipoProducto = :tipoProducto")
-    List<DetalleProducto> findAllByProductoSexoAndProductoTipoProducto(
-            @Param("sexo") Sexo sexo,
-            @Param("tipoProducto") TipoProducto tipoProducto
-    );
-
-    @Query("SELECT dp FROM DetalleProducto dp JOIN dp.producto p WHERE p.sexo = :sexo")
-    List<DetalleProducto> findAllByProductoSexo(
-            @Param("sexo") Sexo sexo
-    );
+    @Query("SELECT DISTINCT dp.color FROM DetalleProducto dp WHERE dp.producto.id = :productoId")
+    List<String> findColoresByProductoId(@Param("productoId") Long productoId);
 }

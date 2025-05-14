@@ -31,7 +31,8 @@ public class SecurityConfig {
         //1 - Medida de seguridad para POST, una autenticación de un token csfr válido.
         //2 - Establece como publicas las rutas de auth, las demás requieren autenticación.
         return http
-                .csrf(AbstractHttpConfigurer::disable) // 1
+                .csrf(AbstractHttpConfigurer::disable)
+                .cors(cors -> cors.configurationSource(corsConfigurationSource())) // Habilita el uso de corsConfigurationSource()// 1
                 .authorizeHttpRequests(authRequest ->
                         authRequest // 2
                                 .requestMatchers("/api/v1/auth/**").permitAll()

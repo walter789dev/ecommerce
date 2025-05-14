@@ -14,7 +14,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.List;
 
 @SpringBootApplication
@@ -46,6 +45,8 @@ public class EcommerceApplication {
     private DetalleOrdenCompraController detalleOrdenCompraController;
     @Autowired
     private ImagenRepository imagenRepository;
+    @Autowired
+    private StockRepository stockRepository;
 
     @Bean
     @Transactional
@@ -60,6 +61,7 @@ public class EcommerceApplication {
                            CategoriaRepository categoriaRepository,
                            DescuentoRepository descuentoRepository,
                            TalleRepository talleRepository,
+                           StockRepository stockRepository,
                            OrdenCompraRepository ordenCompraRepository,
                            DetalleOrdenCompraController detalleOrdenCompraController) {
         return args -> {
@@ -70,44 +72,25 @@ public class EcommerceApplication {
             // ------------- Provincias --------------- //
             Provincia mendoza = Provincia.builder().nombre("Mendoza").pais(argentina).build();
             Provincia cordoba = Provincia.builder().nombre("Cordoba").pais(argentina).build();
-            Provincia tucuman = Provincia.builder().nombre("Tucuman").pais(argentina).build();
-            Provincia buenos_aires = Provincia.builder().nombre("Buenos Aires").pais(argentina).build();
-            Provincia santa_fe = Provincia.builder().nombre("Santa Fe").pais(argentina).build();
-            Provincia salta = Provincia.builder().nombre("Salta").pais(argentina).build();
 
             provinciaRepository.save(mendoza);
             provinciaRepository.save(cordoba);
-            provinciaRepository.save(tucuman);
-            provinciaRepository.save(buenos_aires);
-            provinciaRepository.save(santa_fe);
-            provinciaRepository.save(salta);
 
             // -------------- Localidades ---------------- //
             Localidad lujan = Localidad.builder().nombre("Lujan de Cuyo").codigoPostal(5505).provincia(mendoza).build();
             Localidad carlos_paz = Localidad.builder().nombre("Carlos Paz").codigoPostal(5152).provincia(cordoba).build();
-            Localidad tafi = Localidad.builder().nombre("Tafi del Valle").codigoPostal(4137).provincia(tucuman).build();
-            Localidad san_pedro = Localidad.builder().nombre("San Pedro").codigoPostal(2930).provincia(buenos_aires).build();
-            Localidad rosario = Localidad.builder().nombre("Rosario").codigoPostal(2000).provincia(santa_fe).build();
-            Localidad cafayate = Localidad.builder().nombre("Cafayate").codigoPostal(4427).provincia(salta).build();
 
             localidadRepository.save(lujan);
             localidadRepository.save(carlos_paz);
-            localidadRepository.save(tafi);
-            localidadRepository.save(san_pedro);
-            localidadRepository.save(rosario);
-            localidadRepository.save(cafayate);
 
             // --------------- Direcciones ----------------- //
             Direccion direccion_mendoza = Direccion.builder().domicilio("San Martín 1500").casa("C4")
                     .localidad(lujan).build();
             Direccion direccion_cordoba = Direccion.builder().domicilio("Av. San Martín 200").casa("F10")
                     .localidad(carlos_paz).build();
-            Direccion direccion_santa_fe = Direccion.builder().domicilio("Corrientes 1000").casa("E25")
-                    .localidad(rosario).build();
 
             direccionRepository.save(direccion_mendoza);
             direccionRepository.save(direccion_cordoba);
-            direccionRepository.save(direccion_santa_fe);
 
             // --------------- Usuarios ------------------- //
             Usuario usuario1 = Usuario.builder()
@@ -118,10 +101,6 @@ public class EcommerceApplication {
                     .nombre("Rodrigo").apellido("Mora").dni(34789123).rol(Rol.USUARIO)
                     .username("correo2@gmail.com").password("contraseña")
                     .direccion(direccion_cordoba).build();
-            Usuario usuario3 = Usuario.builder()
-                    .nombre("Esteban").apellido("Quito").dni(56777903).rol(Rol.USUARIO)
-                    .username("esteban34@gmail.com").password("estebanquito")
-                    .direccion(direccion_santa_fe).build();
             Usuario admin1 = Usuario.builder()
                     .nombre("Ernesto").apellido("Sabato").dni(24789123).rol(Rol.ADMIN)
                     .username("eladmin123@gmail.com").password("adminquebuentipo")
@@ -129,29 +108,44 @@ public class EcommerceApplication {
 
             usuarioRepository.save(usuario1);
             usuarioRepository.save(usuario2);
-            usuarioRepository.save(usuario3);
             usuarioRepository.save(admin1);
+
+            // -------------- Categoria ----------------- //
+            Categoria running = Categoria.builder().nombre("Running").build();
+            Categoria urbano = Categoria.builder().nombre("Urbano").build();
+            Categoria training = Categoria.builder().nombre("Entrenamiento").build();
+            Categoria futbol = Categoria.builder().nombre("Futbol").build();
+
+            categoriaRepository.save(running);
+            categoriaRepository.save(urbano);
+            categoriaRepository.save(training);
+            categoriaRepository.save(futbol);
 
             // ----------------- Productos ------------------ //
             Producto producto1 = Producto.builder()
                     .nombre("Zapatillas Speedcat OG").tipoProducto(TipoProducto.CALZADO)
                     .sexo(Sexo.HOMBRE).precio_compra(160000)
+                    .categorias(List.of(urbano))
                     .precio_venta(180000).build();
             Producto producto2 = Producto.builder()
                     .nombre("Zapatillas PUMA x HELLO KITTY Suede XL").tipoProducto(TipoProducto.CALZADO)
                     .sexo(Sexo.MUJER).precio_compra(19000)
+                    .categorias(List.of(urbano, running))
                     .precio_venta(200000).build();
             Producto producto3 = Producto.builder()
                     .nombre("Buzo WARDROBE Essentials").tipoProducto(TipoProducto.ROPA)
                     .sexo(Sexo.HOMBRE).precio_compra(8000)
+                    .categorias(List.of(training))
                     .precio_venta(90000).build();
             Producto producto4 = Producto.builder()
                     .nombre("Campera puffer oversize").tipoProducto(TipoProducto.ROPA)
                     .sexo(Sexo.MUJER).precio_compra(310000)
+                    .categorias(List.of(urbano))
                     .precio_venta(330000).build();
             Producto producto5 = Producto.builder()
                     .nombre("Botines de fútbol FUTURE 8 ULTIMATE MxSG").tipoProducto(TipoProducto.CALZADO)
                     .sexo(Sexo.HOMBRE).precio_compra(330000)
+                    .categorias(List.of(futbol))
                     .precio_venta(350000).build();
 
             productoRepository.save(producto1);
@@ -159,34 +153,6 @@ public class EcommerceApplication {
             productoRepository.save(producto3);
             productoRepository.save(producto4);
             productoRepository.save(producto5);
-
-            // -------------- Categoria ----------------- //
-            Categoria running = Categoria.builder().nombre("Running")
-                    .productos(Arrays.asList(producto1, producto2)).build();
-            Categoria urbano = Categoria.builder().nombre("Urbano")
-                    .productos(Arrays.asList(producto1, producto2)).build();
-            Categoria training = Categoria.builder().nombre("Entrenamiento")
-                    .productos(List.of(producto4)).build();
-            Categoria futbol = Categoria.builder().nombre("Futbol")
-                    .productos(List.of(producto5)).build();
-
-            categoriaRepository.save(running);
-            categoriaRepository.save(urbano);
-            categoriaRepository.save(training);
-            categoriaRepository.save(futbol);
-
-            // ---------------- Talles --------------- //
-            Talle l = Talle.builder().name("L").build();
-            Talle xl = Talle.builder().name("XL").build();
-            Talle xxl = Talle.builder().name("XXL").build();
-            Talle talle1 = Talle.builder().name("39").build();
-            Talle talle2 = Talle.builder().name("40").build();
-
-            talleRepository.save(l);
-            talleRepository.save(xl);
-            talleRepository.save(xxl);
-            talleRepository.save(talle1);
-            talleRepository.save(talle2);
 
             // -------------- Descuentos ---------------- //
             Descuento descuento50 = Descuento.builder().nombre("50%")
@@ -244,6 +210,21 @@ public class EcommerceApplication {
             imagenRepository.save(imagen9);
             imagenRepository.save(imagen10);
 
+            // ---------------- Talles --------------- //
+            Talle l = Talle.builder().name("L").build();
+            Talle xl = Talle.builder().name("XL").build();
+            Talle xxl = Talle.builder().name("XXL").build();
+            Talle talle1 = Talle.builder().name("39").build();
+            Talle talle2 = Talle.builder().name("40").build();
+            Talle talle3 = Talle.builder().name("41").build();
+
+            talleRepository.save(l);
+            talleRepository.save(xl);
+            talleRepository.save(xxl);
+            talleRepository.save(talle1);
+            talleRepository.save(talle2);
+            talleRepository.save(talle3);
+
             // ----------------------- Detalle Producto --------------- //
             DetalleProducto speedcat_negro = DetalleProducto.builder()
                     .color("Negro").activo(true)
@@ -265,6 +246,28 @@ public class EcommerceApplication {
                     .color("Amarillo").activo(true)
                     .producto(producto5).descuento(descuento10)
                     .imagenes(List.of(imagen9, imagen10)).build();
+
+            // ------------------------ Stock ------------------------- //
+            Stock speedcat_negro_1 = Stock.builder()
+                    .stock(10).talle(talle1).build();
+            Stock hello_kitty_1 = Stock.builder()
+                    .stock(10).talle(talle2).build();
+            Stock buzo_wardrobe_1 = Stock.builder()
+                    .stock(10).talle(l).build();
+            Stock buzo_wardrobe_2 = Stock.builder()
+                    .stock(10).talle(xl).build();
+            Stock campera_puffer_1 = Stock.builder()
+                    .stock(10).talle(xl).build();
+            Stock botines_future_1 = Stock.builder()
+                    .stock(10).talle(talle1).build();
+
+            // -------------------------------------------------------- //
+
+            speedcat_negro.setStocks(List.of(speedcat_negro_1));
+            hello_kitty.setStocks(List.of(hello_kitty_1));
+            buzo_wardrobe.setStocks(List.of(buzo_wardrobe_1, buzo_wardrobe_2));
+            campera_puffer.setStocks(List.of(campera_puffer_1));
+            botines_future.setStocks(List.of(botines_future_1));
 
             detalleProductoRepository.save(speedcat_negro);
             detalleProductoRepository.save(hello_kitty);

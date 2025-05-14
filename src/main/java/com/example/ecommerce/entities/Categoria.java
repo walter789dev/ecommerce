@@ -3,9 +3,6 @@ package com.example.ecommerce.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "categorias")
@@ -15,7 +12,4 @@ import java.util.List;
 @Builder
 public class Categoria extends Base {
     private String nombre;
-
-    @ManyToMany(mappedBy = "categorias")
-    private List<Producto> productos;
 }

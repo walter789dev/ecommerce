@@ -1,7 +1,8 @@
 package com.example.ecommerce.controllers;
 
-import com.example.ecommerce.dto.ProductFilterDTO;
+import com.example.ecommerce.dto.DetalleProductoFiltroDTO;
 import com.example.ecommerce.entities.DetalleProducto;
+import com.example.ecommerce.entities.Stock;
 import com.example.ecommerce.entities.enums.Sexo;
 import com.example.ecommerce.entities.enums.TipoProducto;
 import com.example.ecommerce.services.DetalleProductoService;
@@ -22,45 +23,39 @@ public class DetalleProductoController extends BaseController<DetalleProducto, L
         super(detalleService);
     }
 
-    // Ver todos los productos del sexo pertinente.
-
-    /**
-     * @GetMapping("/catalogo/{sexoStr}")
-     *     public ResponseEntity<List<DetalleProducto>> getAllDetallesBySexo(
-     *             @PathVariable String sexoStr
-     *     ) {
-     *         try {
-     *             Sexo sexo = Sexo.valueOf(sexoStr.toUpperCase());
-     *
-     *             List<DetalleProducto> detalles = detalleProductoService.getAllDetallesBySexo(sexo);
-     *             return ResponseEntity.ok(detalles);
-     *         } catch (Exception e) {
-     *             return ResponseEntity.status(404).body(null);
-     *         }
-     *     }
-     */
-
-    // Ver los productos del sexo pertinente de acuerdo al catálogo seleccionado.
-    @GetMapping("/catalogo/{sexoStr}")
-    public ResponseEntity<List<DetalleProducto>> getAllDetallesBySexoAndTipoProducto(
-            @RequestParam("sexo") String sexoStr, @RequestParam("tipoProducto") String tipoProductoStr
-    ) {
-        try {
-            Sexo sexo = Sexo.valueOf(sexoStr.toUpperCase());
-            TipoProducto tipoProducto = TipoProducto.valueOf(tipoProductoStr.toUpperCase());
-
-            List<DetalleProducto> detalles = detalleProductoService.getAllDetallesBySexoAndTipoProducto(sexo, tipoProducto);
-            return ResponseEntity.ok(detalles);
-        } catch (Exception e) {
-            return ResponseEntity.status(404).body(null);
-        }
+    @GetMapping("/{id}/stocks")
+    public ResponseEntity<List<Stock>> getAllStockByDetalleProducto(@PathVariable Long id) {
+        List<Stock> stocks = detalleProductoService.getAllStocksByDetalleProducto(id);
+        return ResponseEntity.ok(stocks);
     }
 
+    @GetMapping("/producto/{idProducto}/colores")
+    public ResponseEntity<List<String>> getAllColoresByProducto(
+            @PathVariable Long idProducto) {
+        List<String> colores = detalleProductoService.getAllColoresByProductoId(idProducto);
+        return ResponseEntity.ok(colores);
+    }
 
-    //Recibe los criterios de filtro o para filtrar.
-    @PostMapping("/filtrar")
-    public ResponseEntity<List<DetalleProducto>> filtrarProductos(@RequestBody ProductFilterDTO filtros) {
-        List<DetalleProducto> productosFiltrados = detalleProductoService.getAllProductsFilter(filtros);
-        return ResponseEntity.ok(productosFiltrados);
+    @GetMapping("/catalogo")
+    public ResponseEntity<List<DetalleProducto>> getAllDetallesByFilter(
+            @RequestParam(required = false) Long descuento,
+            @RequestParam(required = false) String sexo,
+            @RequestParam(required = false) String tipoProducto,
+            @RequestParam(required = false) Double precioMin,
+            @RequestParam(required = false) Double precioMax,
+            @RequestParam(required = false) Long talle,
+            @RequestParam(required = false) Long categoria
+    ) {
+        DetalleProductoFiltroDTO filtro = new DetalleProductoFiltroDTO();
+        filtro.setIdDescuento(descuento);
+        filtro.setSexo(sexo != null ? Sexo.valueOf(sexo.toUpperCase()): null);
+        filtro.setTipoProducto(tipoProducto != null ? TipoProducto.valueOf(tipoProducto.toUpperCase()): null);
+        filtro.setPrecioMin(precioMin);
+        filtro.setPrecioMax(precioMax);
+        filtro.setIdTalle(talle);
+        filtro.setIdCategoria(categoria);
+
+        List<DetalleProducto> resultados = detalleProductoService.getAllProductsFilter(filtro);
+        return ResponseEntity.ok(resultados);
     }
 }
