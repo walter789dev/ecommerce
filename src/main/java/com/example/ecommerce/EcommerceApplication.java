@@ -11,6 +11,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
@@ -63,7 +64,8 @@ public class EcommerceApplication {
                            TalleRepository talleRepository,
                            StockRepository stockRepository,
                            OrdenCompraRepository ordenCompraRepository,
-                           DetalleOrdenCompraController detalleOrdenCompraController) {
+                           DetalleOrdenCompraController detalleOrdenCompraController,
+                           PasswordEncoder passwordEncoder) {
         return args -> {
             // --------------- Paises ---------------- //
             Pais argentina = Pais.builder().nombre("Argentina").build();
@@ -95,15 +97,15 @@ public class EcommerceApplication {
             // --------------- Usuarios ------------------- //
             Usuario usuario1 = Usuario.builder()
                     .nombre("Roberto").apellido("Carlos").dni(467890123).rol(Rol.USUARIO)
-                    .username("correo@gmail.com").password("sdsdsdsd")
+                    .username("correo@gmail.com").password(passwordEncoder.encode("sdsdsdsd"))
                     .direccion(direccion_mendoza).build();
             Usuario usuario2 = Usuario.builder()
                     .nombre("Rodrigo").apellido("Mora").dni(34789123).rol(Rol.USUARIO)
-                    .username("correo2@gmail.com").password("contraseña")
+                    .username("correo2@gmail.com").password(passwordEncoder.encode("contraseña"))
                     .direccion(direccion_cordoba).build();
             Usuario admin1 = Usuario.builder()
                     .nombre("Ernesto").apellido("Sabato").dni(24789123).rol(Rol.ADMIN)
-                    .username("eladmin123@gmail.com").password("adminquebuentipo")
+                    .username("eladmin123@gmail.com").password(passwordEncoder.encode("adminquebuentipo"))
                     .direccion(direccion_mendoza).build();
 
             usuarioRepository.save(usuario1);
