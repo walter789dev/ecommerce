@@ -15,7 +15,6 @@ import lombok.*;
 @Builder
 public class Direccion extends Base {
     private String domicilio;
-    private String casa;
 
     @ManyToOne
     @JoinColumn(name = "id_localidad")

@@ -86,9 +86,9 @@ public class EcommerceApplication {
             localidadRepository.save(carlos_paz);
 
             // --------------- Direcciones ----------------- //
-            Direccion direccion_mendoza = Direccion.builder().domicilio("San Martín 1500").casa("C4")
+            Direccion direccion_mendoza = Direccion.builder().domicilio("San Martín 1500")
                     .localidad(lujan).build();
-            Direccion direccion_cordoba = Direccion.builder().domicilio("Av. San Martín 200").casa("F10")
+            Direccion direccion_cordoba = Direccion.builder().domicilio("Av. San Martín 200")
                     .localidad(carlos_paz).build();
 
             direccionRepository.save(direccion_mendoza);
