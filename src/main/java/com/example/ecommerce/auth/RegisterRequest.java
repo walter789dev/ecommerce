@@ -16,5 +16,6 @@ public class RegisterRequest {
     private String password;
     private String direccion;
     private String localidad;
+    private String provincia;
     private int dni;
 }

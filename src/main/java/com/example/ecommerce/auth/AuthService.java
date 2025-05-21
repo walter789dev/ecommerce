@@ -40,7 +40,6 @@ public class AuthService {
         Localidad localidad = localidadRepository.findByNombre("Rosario");
 
         Direccion direccion = Direccion.builder()
-                .casa("T1")
                 .domicilio(request.getDireccion())
                 .localidad(localidad)
                 .build();
