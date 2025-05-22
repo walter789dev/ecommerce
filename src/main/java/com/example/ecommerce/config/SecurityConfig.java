@@ -36,20 +36,13 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authRequest ->
                         authRequest // 2
                                 .requestMatchers("/api/v1/auth/**").permitAll()
-                                .requestMatchers("/api/v1/**").permitAll()
-                                /**
-                                 * .requestMatchers(HttpMethod.GET,
-                                 *        "/api/v1/detalles_productos/**",
-                                 *         "/api/v1/categorias/**",
-                                 *         "/api/v1/talles/**",
-                                 *      "/api/v1/descuentos/**"
-                                 *      ).permitAll()
-                                 * .requestMatchers(
-                                 *          "/api/v1/usuarios/**",
-                                 *            "/api/v1/productos/**",
-                                 *      "/api/v1/ordenes_compras"
-                                 *   ).hasRole("ADMIN")
-                                 */
+                                // .requestMatchers("/api/v1/**").permitAll()
+                                 .requestMatchers(HttpMethod.GET,
+                                        "/api/v1/detalles_productos/**",
+                                         "/api/v1/categorias/**",
+                                         "/api/v1/talles/**",
+                                         "/api/v1/descuentos/**"
+                                      ).permitAll()
                                 .anyRequest().authenticated())
                 // Autenticación basada en jwt. No utilize la de Spring Security
                 .sessionManagement(sessionManager ->
