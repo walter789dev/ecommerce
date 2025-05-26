@@ -33,6 +33,7 @@ public class Usuario extends Base implements UserDetails {
    @JoinColumn(name = "id_direccion")
    private Direccion direccion;
 
+   @Builder.Default
    private boolean activo = true;
 
    @Override

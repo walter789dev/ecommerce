@@ -13,6 +13,6 @@ public interface DetalleProductoRepository extends BaseRepository<DetalleProduct
    @Query("SELECT DISTINCT dp.color FROM DetalleProducto dp WHERE dp.producto.id = :productoId AND dp.activo = true")
    List<String> findColoresByProductoId(@Param("productoId") Long productoId);
 
-   @Query("SELECT * FROM DetalleProducto dp WHERE dp.activo = true")
+   @Query("SELECT dp FROM DetalleProducto dp WHERE dp.activo = true")
    List<DetalleProducto> findAllActive();
 }

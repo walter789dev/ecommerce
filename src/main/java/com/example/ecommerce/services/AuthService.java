@@ -43,7 +43,7 @@ public class AuthService {
    }
 
    public AuthResponse register(RegisterRequest request) {
-      Provincia provincia = provinciaRepository.findByNombre(request.getProvincia());
+      Provincia provincia = provinciaRepository.findByNombre(request.getProvincia().toLowerCase());
 
       if (provincia == null) {
          provincia = Provincia.builder()
@@ -52,7 +52,7 @@ public class AuthService {
          provinciaRepository.save(provincia);
       }
 
-      Localidad localidad = localidadRepository.findByNombre(request.getLocalidad());
+      Localidad localidad = localidadRepository.findByNombre(request.getLocalidad().toLowerCase());
 
       if (localidad == null) {
          localidad = Localidad.builder()

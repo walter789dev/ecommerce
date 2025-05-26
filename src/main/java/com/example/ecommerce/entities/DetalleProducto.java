@@ -14,6 +14,7 @@ import java.util.List;
 @Builder
 public class DetalleProducto extends Base {
    private String color;
+   @Builder.Default
    private boolean activo = true;
 
    @ManyToOne

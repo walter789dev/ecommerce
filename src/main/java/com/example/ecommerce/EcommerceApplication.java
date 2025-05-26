@@ -67,27 +67,27 @@ public class EcommerceApplication {
                           PasswordEncoder passwordEncoder) {
       return args -> {
          // --------------- Paises ---------------- //
-         Pais argentina = Pais.builder().nombre("Argentina").build();
+         Pais argentina = Pais.builder().nombre("argentina").build();
          paisRepository.save(argentina);
 
          // ------------- Provincias --------------- //
-         Provincia mendoza = Provincia.builder().nombre("Mendoza").pais(argentina).build();
-         Provincia cordoba = Provincia.builder().nombre("Cordoba").pais(argentina).build();
+         Provincia mendoza = Provincia.builder().nombre("mendoza").pais(argentina).build();
+         Provincia cordoba = Provincia.builder().nombre("cordoba").pais(argentina).build();
 
          provinciaRepository.save(mendoza);
          provinciaRepository.save(cordoba);
 
          // -------------- Localidades ---------------- //
-         Localidad lujan = Localidad.builder().nombre("Lujan de Cuyo").codigoPostal(5505).provincia(mendoza).build();
-         Localidad carlos_paz = Localidad.builder().nombre("Carlos Paz").codigoPostal(5152).provincia(cordoba).build();
+         Localidad lujan = Localidad.builder().nombre("lujan de cuyo").codigoPostal(5505).provincia(mendoza).build();
+         Localidad carlos_paz = Localidad.builder().nombre("carlos paz").codigoPostal(5152).provincia(cordoba).build();
 
          localidadRepository.save(lujan);
          localidadRepository.save(carlos_paz);
 
          // --------------- Direcciones ----------------- //
-         Direccion direccion_mendoza = Direccion.builder().domicilio("San Martín 1500")
+         Direccion direccion_mendoza = Direccion.builder().domicilio("san martín 1500")
                .localidad(lujan).build();
-         Direccion direccion_cordoba = Direccion.builder().domicilio("Av. San Martín 200")
+         Direccion direccion_cordoba = Direccion.builder().domicilio("av. san martín 200")
                .localidad(carlos_paz).build();
 
          direccionRepository.save(direccion_mendoza);
