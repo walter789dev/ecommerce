@@ -12,24 +12,24 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class DetalleProducto extends Base{
-    private String color;
-    private boolean activo;
+public class DetalleProducto extends Base {
+   private String color;
+   private boolean activo = true;
 
-    @ManyToOne
-    @JoinColumn(name = "id_producto")
-    private Producto producto;
+   @ManyToOne
+   @JoinColumn(name = "id_producto")
+   private Producto producto;
 
-    @ManyToOne
-    @JoinColumn(name = "id_descuento")
-    private Descuento descuento;
+   @ManyToOne
+   @JoinColumn(name = "id_descuento")
+   private Descuento descuento;
 
-    @OneToMany
-    @JoinColumn(name = "id_detalle_producto")
-    private List<Imagen> imagenes;
+   @OneToMany
+   @JoinColumn(name = "id_detalle_producto")
+   private List<Imagen> imagenes;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "id_detalle_producto") // FK en Stock
-    private List<Stock> stocks;
+   @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+   @JoinColumn(name = "id_detalle_producto") // FK en Stock
+   private List<Stock> stocks;
 
 }

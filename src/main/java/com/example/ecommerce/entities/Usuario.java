@@ -18,23 +18,25 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 public class Usuario extends Base implements UserDetails {
-    private String nombre;
-    private String apellido;
-    private String password;
-    private int dni;
+   private String nombre;
+   private String apellido;
+   private String password;
+   private int dni;
 
-    @Column(nullable = false)
-    private String username;
+   @Column(nullable = false)
+   private String username;
 
-    @Enumerated(EnumType.STRING)
-    private Rol rol;
+   @Enumerated(EnumType.STRING)
+   private Rol rol;
 
-    @ManyToOne
-    @JoinColumn(name = "id_direccion")
-    private Direccion direccion;
+   @ManyToOne
+   @JoinColumn(name = "id_direccion")
+   private Direccion direccion;
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(rol.name()));
-    }
+   private boolean activo = true;
+
+   @Override
+   public Collection<? extends GrantedAuthority> getAuthorities() {
+      return List.of(new SimpleGrantedAuthority(rol.name()));
+   }
 }

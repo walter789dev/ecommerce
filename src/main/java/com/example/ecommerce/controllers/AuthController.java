@@ -1,6 +1,10 @@
-package com.example.ecommerce.auth;
+package com.example.ecommerce.controllers;
 
+import com.example.ecommerce.auth.AuthResponse;
+import com.example.ecommerce.auth.LoginRequest;
+import com.example.ecommerce.auth.RegisterRequest;
 import com.example.ecommerce.entities.Usuario;
+import com.example.ecommerce.services.AuthService;
 import com.example.ecommerce.services.UsuarioService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
