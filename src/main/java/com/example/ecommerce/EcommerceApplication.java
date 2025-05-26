@@ -114,7 +114,7 @@ public class EcommerceApplication {
          // -------------- Categoria ----------------- //
          Categoria running = Categoria.builder().nombre("Running").build();
          Categoria urbano = Categoria.builder().nombre("Urbano").build();
-         Categoria training = Categoria.builder().nombre("Entrenamiento").build();
+         Categoria training = Categoria.builder().nombre("Training").build();
          Categoria futbol = Categoria.builder().nombre("Futbol").build();
 
          categoriaRepository.save(running);
