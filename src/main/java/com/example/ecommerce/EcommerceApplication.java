@@ -47,6 +47,8 @@ public class EcommerceApplication {
    private ImagenRepository imagenRepository;
    @Autowired
    private StockRepository stockRepository;
+   @Autowired
+   private PrecioRepository precioRepository;
 
    @Bean
    @Transactional
@@ -61,6 +63,7 @@ public class EcommerceApplication {
                           CategoriaRepository categoriaRepository,
                           DescuentoRepository descuentoRepository,
                           TalleRepository talleRepository,
+                          PrecioRepository precioRepository,
                           StockRepository stockRepository,
                           OrdenCompraRepository ordenCompraRepository,
                           DetalleOrdenCompraController detalleOrdenCompraController,
@@ -125,29 +128,19 @@ public class EcommerceApplication {
          // ----------------- Productos ------------------ //
          Producto producto1 = Producto.builder()
                .nombre("Zapatillas Speedcat OG").tipoProducto(TipoProducto.CALZADO)
-               .sexo(Sexo.HOMBRE).precio_compra(160000)
-               .categorias(List.of(urbano))
-               .precio_venta(180000).build();
+               .sexo(Sexo.HOMBRE).categorias(List.of(urbano)).build();
          Producto producto2 = Producto.builder()
                .nombre("Zapatillas PUMA x HELLO KITTY Suede XL").tipoProducto(TipoProducto.CALZADO)
-               .sexo(Sexo.MUJER).precio_compra(19000)
-               .categorias(List.of(urbano, running))
-               .precio_venta(200000).build();
+               .sexo(Sexo.MUJER).categorias(List.of(urbano, running)).build();
          Producto producto3 = Producto.builder()
                .nombre("Buzo WARDROBE Essentials").tipoProducto(TipoProducto.ROPA)
-               .sexo(Sexo.HOMBRE).precio_compra(8000)
-               .categorias(List.of(training))
-               .precio_venta(90000).build();
+               .sexo(Sexo.HOMBRE).categorias(List.of(training)).build();
          Producto producto4 = Producto.builder()
                .nombre("Campera puffer oversize").tipoProducto(TipoProducto.ROPA)
-               .sexo(Sexo.MUJER).precio_compra(310000)
-               .categorias(List.of(urbano))
-               .precio_venta(330000).build();
+               .sexo(Sexo.MUJER).categorias(List.of(urbano)).build();
          Producto producto5 = Producto.builder()
                .nombre("Botines de fútbol FUTURE 8 ULTIMATE MxSG").tipoProducto(TipoProducto.CALZADO)
-               .sexo(Sexo.HOMBRE).precio_compra(330000)
-               .categorias(List.of(futbol))
-               .precio_venta(350000).build();
+               .sexo(Sexo.HOMBRE).categorias(List.of(futbol)).build();
 
          productoRepository.save(producto1);
          productoRepository.save(producto2);
@@ -226,26 +219,38 @@ public class EcommerceApplication {
          talleRepository.save(talle2);
          talleRepository.save(talle3);
 
+         // ----------------- Precio ------------------ //
+         Precio precio1 = Precio.builder().precio_compra(160000).precio_venta(180000).build();
+         Precio precio2 = Precio.builder().precio_compra(19000).precio_venta(200000).build();
+         Precio precio3 = Precio.builder().precio_compra(8000).precio_venta(90000).build();
+         Precio precio4 = Precio.builder().precio_compra(5000).precio_venta(60000).build();
+         Precio precio5 = Precio.builder().precio_compra(8000).precio_venta(90000).build();
+
+         precioRepository.save(precio1);
+         precioRepository.save(precio2);
+         precioRepository.save(precio3);
+         precioRepository.save(precio4);
+         precioRepository.save(precio5);
+
          // ----------------------- Detalle Producto --------------- //
          DetalleProducto speedcat_negro = DetalleProducto.builder()
-               .color("Negro").activo(true)
+               .color("Negro").activo(true).precio(precio1)
                .producto(producto1).descuento(descuento10)
                .imagenes(List.of(imagen1, imagen2)).build();
-
          DetalleProducto hello_kitty = DetalleProducto.builder()
-               .color("Negro").activo(true)
+               .color("Negro").activo(true).precio(precio2)
                .producto(producto2).descuento(descuento10)
                .imagenes(List.of(imagen3, imagen4)).build();
          DetalleProducto buzo_wardrobe = DetalleProducto.builder()
-               .color("Negro").activo(true)
+               .color("Negro").activo(true).precio(precio3)
                .producto(producto3).descuento(descuento50)
                .imagenes(List.of(imagen5, imagen6)).build();
          DetalleProducto campera_puffer = DetalleProducto.builder()
-               .color("Beige").activo(true)
+               .color("Beige").activo(true).precio(precio4)
                .producto(producto4).descuento(descuento10)
                .imagenes(List.of(imagen7, imagen8)).build();
          DetalleProducto botines_future = DetalleProducto.builder()
-               .color("Amarillo").activo(true)
+               .color("Amarillo").activo(true).precio(precio5)
                .producto(producto5).descuento(descuento10)
                .imagenes(List.of(imagen9, imagen10)).build();
 

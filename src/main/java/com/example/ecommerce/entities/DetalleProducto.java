@@ -21,6 +21,10 @@ public class DetalleProducto extends Base {
    @JoinColumn(name = "id_producto")
    private Producto producto;
 
+   @OneToOne
+   @JoinColumn(name = "id_precio")
+   private Precio precio;
+
    @ManyToOne
    @JoinColumn(name = "id_descuento")
    private Descuento descuento;
