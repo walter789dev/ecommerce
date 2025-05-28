@@ -47,8 +47,6 @@ public class EcommerceApplication {
    private ImagenRepository imagenRepository;
    @Autowired
    private StockRepository stockRepository;
-   @Autowired
-   private PrecioRepository precioRepository;
 
    @Bean
    @Transactional
@@ -63,7 +61,6 @@ public class EcommerceApplication {
                           CategoriaRepository categoriaRepository,
                           DescuentoRepository descuentoRepository,
                           TalleRepository talleRepository,
-                          PrecioRepository precioRepository,
                           StockRepository stockRepository,
                           OrdenCompraRepository ordenCompraRepository,
                           DetalleOrdenCompraController detalleOrdenCompraController,
@@ -219,38 +216,25 @@ public class EcommerceApplication {
          talleRepository.save(talle2);
          talleRepository.save(talle3);
 
-         // ----------------- Precio ------------------ //
-         Precio precio1 = Precio.builder().precio_compra(160000).precio_venta(180000).build();
-         Precio precio2 = Precio.builder().precio_compra(19000).precio_venta(200000).build();
-         Precio precio3 = Precio.builder().precio_compra(8000).precio_venta(90000).build();
-         Precio precio4 = Precio.builder().precio_compra(5000).precio_venta(60000).build();
-         Precio precio5 = Precio.builder().precio_compra(8000).precio_venta(90000).build();
-
-         precioRepository.save(precio1);
-         precioRepository.save(precio2);
-         precioRepository.save(precio3);
-         precioRepository.save(precio4);
-         precioRepository.save(precio5);
-
          // ----------------------- Detalle Producto --------------- //
          DetalleProducto speedcat_negro = DetalleProducto.builder()
-               .color("Negro").activo(true).precio(precio1)
+               .color("Negro").activo(true).precioCompra(100000).precioVenta(120000)
                .producto(producto1).descuento(descuento10)
                .imagenes(List.of(imagen1, imagen2)).build();
          DetalleProducto hello_kitty = DetalleProducto.builder()
-               .color("Negro").activo(true).precio(precio2)
+               .color("Negro").activo(true).precioCompra(130000).precioVenta(150000)
                .producto(producto2).descuento(descuento10)
                .imagenes(List.of(imagen3, imagen4)).build();
          DetalleProducto buzo_wardrobe = DetalleProducto.builder()
-               .color("Negro").activo(true).precio(precio3)
+               .color("Negro").activo(true).precioCompra(140000).precioVenta(160000)
                .producto(producto3).descuento(descuento50)
                .imagenes(List.of(imagen5, imagen6)).build();
          DetalleProducto campera_puffer = DetalleProducto.builder()
-               .color("Beige").activo(true).precio(precio4)
+               .color("Beige").activo(true).precioCompra(170000).precioVenta(180000)
                .producto(producto4).descuento(descuento10)
                .imagenes(List.of(imagen7, imagen8)).build();
          DetalleProducto botines_future = DetalleProducto.builder()
-               .color("Amarillo").activo(true).precio(precio5)
+               .color("Amarillo").activo(true).precioCompra(190000).precioVenta(220000)
                .producto(producto5).descuento(descuento10)
                .imagenes(List.of(imagen9, imagen10)).build();
 

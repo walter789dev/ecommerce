@@ -8,13 +8,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/v1/imagenes")
-public class ImagenController extends BaseController<Imagen, Long>{
-
-    @Autowired
-    private ImagenService imagenService;
-
-    public ImagenController(ImagenService imagenService){
-        super(imagenService);
-    }
+public class ImagenController extends BaseController<Imagen, Long> {
+   public ImagenController(ImagenService imagenService) {
+      super(imagenService);
+   }
 
 }
