@@ -1,10 +1,12 @@
 package com.example.ecommerce.controllers;
 
+import com.example.ecommerce.dto.DetalleColoresDTO;
 import com.example.ecommerce.dto.DetalleProductoFiltroDTO;
 import com.example.ecommerce.entities.*;
 import com.example.ecommerce.entities.enums.Sexo;
 import com.example.ecommerce.entities.enums.TipoProducto;
 import com.example.ecommerce.services.DetalleProductoService;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +22,16 @@ public class DetalleProductoController extends BaseController<DetalleProducto, L
 
    public DetalleProductoController(DetalleProductoService detalleService) {
       super(detalleService);
+   }
+
+   @GetMapping("/colores/producto/{productoId}")
+   public ResponseEntity<List<DetalleColoresDTO>> getAllColoresByProductoId(@PathVariable Long productoId) {
+      try {
+         List<DetalleColoresDTO> detalles = detalleProductoService.getAllColoresByProductoId(productoId);
+         return ResponseEntity.ok(detalles);
+      } catch (EntityNotFoundException e) {
+         return ResponseEntity.notFound().build();
+      }
    }
 
    @GetMapping("/catalogo")

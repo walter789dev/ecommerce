@@ -8,9 +8,9 @@ import java.util.List;
 
 @Repository
 public interface TalleRepository extends BaseRepository<Talle, Long> {
-   @Query("SELECT e FROM talles e WHERE e.name REGEXP '^[A-Za-z]+$'")
+   @Query(value = "SELECT * FROM talles e WHERE e.name REGEXP '^[A-Za-z]+$'", nativeQuery = true)
    List<Talle> findByNamesAlphabeticOnly();
 
-   @Query("SELECT e FROM talles e WHERE e.name REGEXP '^[0-9]+$'")
+   @Query(value = "SELECT * FROM talles e WHERE e.name REGEXP '^[0-9]+$'", nativeQuery = true)
    List<Talle> findByNamesNumericOnly();
 }

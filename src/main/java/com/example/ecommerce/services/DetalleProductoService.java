@@ -1,11 +1,10 @@
 package com.example.ecommerce.services;
 
+import com.example.ecommerce.dto.DetalleColoresDTO;
 import com.example.ecommerce.dto.DetalleProductoFiltroDTO;
 import com.example.ecommerce.entities.DetalleProducto;
-import com.example.ecommerce.entities.Stock;
 import com.example.ecommerce.repositories.DetalleProductoRepository;
 import com.example.ecommerce.specification.DetalleProductoSpecification;
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,26 +22,13 @@ public class DetalleProductoService extends BaseService<DetalleProducto, Long> {
       super(detalleProductoRepository);
    }
 
-   public List<DetalleProducto> findAllActive() throws Exception {
+   @Override
+   public List<DetalleProducto> getAll() throws Exception {
       try {
          return detalleProductoRepository.findAllActive();
       } catch (Exception e) {
          throw new Exception(e.getMessage());
       }
-   }
-
-   public List<String> getAllColoresByProductoId(Long productoId) {
-      return detalleProductoRepository.findColoresByProductoId(productoId);
-   }
-
-   public List<DetalleProducto> getAllProductsFilter(DetalleProductoFiltroDTO filtro) {
-      return detalleProductoRepository.findAll(DetalleProductoSpecification.filterDetalles(filtro));
-   }
-
-   public List<Stock> getAllStocksByDetalleProducto(Long detalleProductoId) {
-      DetalleProducto detalleProducto = detalleProductoRepository.findById(detalleProductoId)
-            .orElseThrow(() -> new EntityNotFoundException("DetalleProducto no encontrado"));
-      return detalleProducto.getStocks();
    }
 
    @Override
@@ -60,5 +46,13 @@ public class DetalleProductoService extends BaseService<DetalleProducto, Long> {
       } catch (Exception e) {
          throw new Exception(e.getMessage());
       }
+   }
+
+   public List<DetalleColoresDTO> getAllColoresByProductoId(Long productoId) {
+      return detalleProductoRepository.findColoresAndIdsByProductoId(productoId);
+   }
+
+   public List<DetalleProducto> getAllProductsFilter(DetalleProductoFiltroDTO filtro) {
+      return detalleProductoRepository.findAll(DetalleProductoSpecification.filterDetalles(filtro));
    }
 }

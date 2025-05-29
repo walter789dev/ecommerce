@@ -241,24 +241,36 @@ public class EcommerceApplication {
          // ------------------------ Stock ------------------------- //
          Stock speedcat_negro_1 = Stock.builder()
                .stock(10).talle(talle1).build();
+         Stock speedcat_negro_2 = Stock.builder()
+               .stock(10).talle(talle2).build();
+
          Stock hello_kitty_1 = Stock.builder()
                .stock(10).talle(talle2).build();
+         Stock hello_kitty_2 = Stock.builder()
+               .stock(10).talle(talle3).build();
+
          Stock buzo_wardrobe_1 = Stock.builder()
                .stock(10).talle(l).build();
          Stock buzo_wardrobe_2 = Stock.builder()
                .stock(10).talle(xl).build();
+
          Stock campera_puffer_1 = Stock.builder()
                .stock(10).talle(xl).build();
+         Stock campera_puffer_2 = Stock.builder()
+               .stock(10).talle(xxl).build();
+
          Stock botines_future_1 = Stock.builder()
                .stock(10).talle(talle1).build();
+         Stock botines_future_2 = Stock.builder()
+               .stock(10).talle(talle2).build();
 
          // -------------------------------------------------------- //
 
-         speedcat_negro.setStocks(List.of(speedcat_negro_1));
-         hello_kitty.setStocks(List.of(hello_kitty_1));
+         speedcat_negro.setStocks(List.of(speedcat_negro_1, speedcat_negro_2));
+         hello_kitty.setStocks(List.of(hello_kitty_1, hello_kitty_2));
          buzo_wardrobe.setStocks(List.of(buzo_wardrobe_1, buzo_wardrobe_2));
-         campera_puffer.setStocks(List.of(campera_puffer_1));
-         botines_future.setStocks(List.of(botines_future_1));
+         campera_puffer.setStocks(List.of(campera_puffer_1, campera_puffer_2));
+         botines_future.setStocks(List.of(botines_future_1, botines_future_2));
 
          detalleProductoRepository.save(speedcat_negro);
          detalleProductoRepository.save(hello_kitty);
