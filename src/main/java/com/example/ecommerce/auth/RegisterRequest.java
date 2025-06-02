@@ -10,12 +10,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RegisterRequest {
-    private String nombre;
-    private String apellido;
-    private String email;
-    private String password;
-    private String direccion;
-    private String localidad;
-    private String provincia;
-    private int dni;
+   private String nombre;
+   private String apellido;
+   private String email;
+   private String password;
+   private String direccion;
+   private int codigoPostal;
+   private String localidad;
+   private String provincia;
+   private int dni;
 }

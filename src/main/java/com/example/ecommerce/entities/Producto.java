@@ -16,22 +16,19 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 public class Producto extends Base {
-    private String nombre;
+   private String nombre;
 
-    @Enumerated(EnumType.STRING)
-    private Sexo sexo;
+   @Enumerated(EnumType.STRING)
+   private Sexo sexo;
 
-    private double precio_compra;
-    private double precio_venta;
+   @Enumerated(EnumType.STRING)
+   private TipoProducto tipoProducto;
 
-    @Enumerated(EnumType.STRING)
-    private TipoProducto tipoProducto;
-
-    @ManyToMany
-    @JoinTable(
-            name = "productos_categorias",
-            joinColumns = @JoinColumn(name = "id_producto"),
-            inverseJoinColumns = @JoinColumn(name = "id_categoria")
-    )
-    private List<Categoria> categorias;
+   @ManyToMany
+   @JoinTable(
+         name = "productos_categorias",
+         joinColumns = @JoinColumn(name = "id_producto"),
+         inverseJoinColumns = @JoinColumn(name = "id_categoria")
+   )
+   private List<Categoria> categorias;
 }
