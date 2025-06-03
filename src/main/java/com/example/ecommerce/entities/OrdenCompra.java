@@ -1,12 +1,10 @@
 package com.example.ecommerce.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
@@ -16,10 +14,14 @@ import java.util.Date;
 @NoArgsConstructor
 @Builder
 public class OrdenCompra extends Base {
-    @ManyToOne
-    @JoinColumn(name = "id_usuario")
-    private Usuario usuario;
+   @ManyToOne
+   @JoinColumn(name = "id_usuario")
+   private Usuario usuario;
 
-    private Date fecha_compra;
-    private double total;
+   @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+   @JoinColumn(name = "orden_compra_id")
+   private List<DetalleOrdenCompra> detalleOrdenCompras;
+
+   private LocalDate fechaCompra;
+   private double total;
 }
