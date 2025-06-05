@@ -1,6 +1,7 @@
 package com.example.ecommerce.controllers;
 
 import com.example.ecommerce.dto.CarritoDTO;
+import com.example.ecommerce.dto.OrderDetailDTO;
 import com.example.ecommerce.entities.DetalleOrdenCompra;
 import com.example.ecommerce.entities.DetalleProducto;
 import com.example.ecommerce.services.OrdenCompraService;
@@ -34,11 +35,14 @@ public class MercadoPagoController {
          MercadoPagoConfig.setAccessToken(mercadoPagoAccessToken);
 
          List<PreferenceItemRequest> items = new ArrayList<>();
-         List<DetalleOrdenCompra> detallesOrden = ordenCompraService.crearOrdenCompra(carrito);
+         OrderDetailDTO detallesOrden = ordenCompraService.crearOrdenCompra(carrito);
 
-         for (DetalleOrdenCompra detalle : detallesOrden) {
+         List<DetalleOrdenCompra> detallesOrdenCompras = detallesOrden.getDetallesOrdenCompras();
+         List<Double> preciosDescuentos = detallesOrden.getPreciosDescuentos();
+
+         for (DetalleOrdenCompra detalle : detallesOrdenCompras) {
             DetalleProducto detalleProducto = detalle.getDetalleProducto();
-            double precioFinal = detalleProducto.getPrecioVenta() * detalle.getCantidad();
+            double precioFinal = preciosDescuentos.get(detallesOrdenCompras.indexOf(detalle));
 
             PreferenceItemRequest item = PreferenceItemRequest.builder()
                   .id(detalle.getId().toString())
@@ -47,6 +51,7 @@ public class MercadoPagoController {
                   .currencyId("ARS")
                   .unitPrice(BigDecimal.valueOf(precioFinal))
                   .build();
+
             items.add(item);
          }
 
@@ -83,8 +88,7 @@ public class MercadoPagoController {
          Preference preference = client.create(preferenceRequest);
          String prefId = preference.getId();
 
-         System.out.println("URL de pago: " + preference.getInitPoint());
-         return ResponseEntity.status(HttpStatus.OK).body("{\"preferenceId\":\"" + prefId + "\",\"url\":\"" + preference.getInitPoint() + "\"}");
+         return ResponseEntity.status(HttpStatus.OK).body("{\"preferenceId\":\"" + prefId + "\"}");
       } catch (MPApiException e) {
          var apiResponse = e.getApiResponse();
          String content = apiResponse.getContent();

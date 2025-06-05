@@ -18,7 +18,4 @@ public class Descuento extends Base {
    private LocalDate fechaInicio;
    private LocalDate fechaFin;
    private double porcentaje;
-
-   @Builder.Default
-   private boolean activo = true;
 }

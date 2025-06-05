@@ -2,6 +2,7 @@ package com.example.ecommerce.services;
 
 import com.example.ecommerce.dto.CarritoDTO;
 import com.example.ecommerce.dto.CarritoItemDTO;
+import com.example.ecommerce.dto.OrderDetailDTO;
 import com.example.ecommerce.entities.DetalleOrdenCompra;
 import com.example.ecommerce.entities.DetalleProducto;
 import com.example.ecommerce.entities.OrdenCompra;
@@ -31,13 +32,30 @@ public class OrdenCompraService extends BaseService<OrdenCompra, Long> {
       super(ordenCompraRepository);
    }
 
-   public List<DetalleOrdenCompra> crearOrdenCompra(CarritoDTO carrito) throws Exception {
+   public OrderDetailDTO crearOrdenCompra(CarritoDTO carrito) throws Exception {
       List<DetalleOrdenCompra> productos = new ArrayList<>();
+      List<Double> preciosDescuentos = new ArrayList<>();
       double precioTotal = 0.0;
 
       for (CarritoItemDTO item : carrito.getProductos()) {
          DetalleProducto detalleProducto = detalleProductoRepository.findById(item.getId()).get();
-         precioTotal += detalleProducto.getPrecioVenta() * item.getCantidad();
+         double precioTemporal = 0.0;
+
+         LocalDate fechaActual = LocalDate.now();
+         LocalDate fechaFin = detalleProducto.getDescuento().getFechaFin();
+         LocalDate fechaInicio = detalleProducto.getDescuento().getFechaInicio();
+
+         if (fechaActual.isAfter(fechaInicio) || fechaActual.isBefore(fechaFin)) {
+            precioTemporal += (
+                  detalleProducto.getPrecioVenta() -
+                        (detalleProducto.getPrecioVenta() * detalleProducto.getDescuento().getPorcentaje()))
+                  * item.getCantidad();
+         } else {
+            precioTemporal += detalleProducto.getPrecioVenta() * item.getCantidad();
+         }
+
+         preciosDescuentos.add(precioTemporal);
+         precioTotal += precioTemporal;
 
          DetalleOrdenCompra detalleOrdenCompra = DetalleOrdenCompra.builder()
                .cantidad(item.getCantidad())
@@ -57,6 +75,10 @@ public class OrdenCompraService extends BaseService<OrdenCompra, Long> {
             .build();
 
       ordenCompraRepository.save(ordenCompra);
-      return productos;
+
+      return OrderDetailDTO.builder()
+            .detallesOrdenCompras(productos)
+            .preciosDescuentos(preciosDescuentos)
+            .build();
    }
 }
