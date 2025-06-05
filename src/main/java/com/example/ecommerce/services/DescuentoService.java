@@ -36,21 +36,4 @@ public class DescuentoService extends BaseService<Descuento, Long> {
          throw new Exception("No hay descuentos del porcentaje solicitado", e);
       }
    }
-
-   @Override
-   @Transactional
-   public void delete(Long id) throws Exception {
-      try {
-         Optional<Descuento> optional = descuentoRepository.findById(id);
-         if (optional.isPresent()) {
-            Descuento descuento = optional.get();
-            descuento.setActivo(!descuento.isActivo());
-            descuentoRepository.save(descuento);
-         } else {
-            throw new Exception("Descuento no encontrado");
-         }
-      } catch (Exception e) {
-         throw new Exception(e.getMessage());
-      }
-   }
 }
