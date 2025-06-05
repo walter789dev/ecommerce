@@ -29,7 +29,7 @@ public class UsuarioService extends BaseService<Usuario, Long> {
          Optional<Usuario> optional = usuarioRepository.findById(id);
          if (optional.isPresent()) {
             Usuario user = optional.get();
-            user.setActivo(false);
+            user.setActivo(!user.isActivo());
             usuarioRepository.save(user);
          } else {
             throw new Exception("Usuario no encontrado");

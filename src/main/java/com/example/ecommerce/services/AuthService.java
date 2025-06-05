@@ -76,7 +76,7 @@ public class AuthService {
             .dni(request.getDni())
             .username(request.getEmail())
             .password(passwordEncoder.encode(request.getPassword()))
-            .rol(Rol.USUARIO)
+            .rol(Rol.valueOf(request.getRol()))
             .direccion(direccion)
             .build();
 

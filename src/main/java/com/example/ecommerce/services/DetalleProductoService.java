@@ -38,7 +38,7 @@ public class DetalleProductoService extends BaseService<DetalleProducto, Long> {
          Optional<DetalleProducto> optional = detalleProductoRepository.findById(id);
          if (optional.isPresent()) {
             DetalleProducto detalleProducto = optional.get();
-            detalleProducto.setActivo(false);
+            detalleProducto.setActivo(!detalleProducto.isActivo());
             detalleProductoRepository.save(detalleProducto);
          } else {
             throw new Exception("Producto no encontrado");

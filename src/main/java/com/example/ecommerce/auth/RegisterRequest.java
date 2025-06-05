@@ -1,5 +1,6 @@
 package com.example.ecommerce.auth;
 
+import com.example.ecommerce.entities.enums.Rol;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,4 +20,5 @@ public class RegisterRequest {
    private String localidad;
    private String provincia;
    private int dni;
+   private String rol;
 }

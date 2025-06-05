@@ -14,8 +14,11 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Builder
 public class Descuento extends Base {
-    private String nombre;
-    private LocalDate fechaInicio;
-    private LocalDate fechaFin;
-    private double porcentaje;
+   private String nombre;
+   private LocalDate fechaInicio;
+   private LocalDate fechaFin;
+   private double porcentaje;
+
+   @Builder.Default
+   private boolean activo = true;
 }
