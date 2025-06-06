@@ -44,7 +44,7 @@ public class DescuentoService extends BaseService<Descuento, Long> {
          Optional<Descuento> optional = descuentoRepository.findById(id);
          if (optional.isPresent()) {
             Descuento descuento = optional.get();
-            descuento.setActivo(!descuento.isActivo());
+            //descuento.setActivo(!descuento.isActivo());
             descuentoRepository.save(descuento);
          } else {
             throw new Exception("Descuento no encontrado");

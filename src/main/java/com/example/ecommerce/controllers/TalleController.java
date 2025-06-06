@@ -21,6 +21,8 @@ public class TalleController extends BaseController<Talle, Long> {
       super(talleService);
    }
 
+   /*
+
    @GetMapping("/alfabetico")
    public ResponseEntity<List<Talle>> findByNamesAlphabeticOnly() throws Exception {
       try {
@@ -40,4 +42,6 @@ public class TalleController extends BaseController<Talle, Long> {
          throw new Exception("No existen talles numericos", e);
       }
    }
+
+    */
 }

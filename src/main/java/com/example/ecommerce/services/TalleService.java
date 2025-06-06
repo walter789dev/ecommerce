@@ -17,6 +17,7 @@ public class TalleService extends BaseService<Talle, Long> {
       super(talleRepository);
    }
 
+   /*
    public List<Talle> findByNamesAlphabeticOnly() throws Exception {
       try {
          return talleRepository.findByNamesAlphabeticOnly();
@@ -32,4 +33,6 @@ public class TalleService extends BaseService<Talle, Long> {
          throw new Exception("No existen talles numericos", e);
       }
    }
+
+    */
 }
