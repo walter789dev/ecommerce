@@ -10,4 +10,5 @@ import lombok.NoArgsConstructor;
 public class CarritoItemDTO {
    private Long id;
    private int cantidad;
+   private Long idTalle;
 }

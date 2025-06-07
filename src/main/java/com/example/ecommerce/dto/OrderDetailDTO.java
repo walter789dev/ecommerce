@@ -14,5 +14,4 @@ import java.util.List;
 @Builder
 public class OrderDetailDTO {
    private List<DetalleOrdenCompra> detallesOrdenCompras;
-   private List<Double> preciosDescuentos;
 }

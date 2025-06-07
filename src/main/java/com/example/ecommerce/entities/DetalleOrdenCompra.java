@@ -19,4 +19,5 @@ public class DetalleOrdenCompra extends Base {
    private DetalleProducto detalleProducto;
 
    private int cantidad;
+   private Talle talle;
 }

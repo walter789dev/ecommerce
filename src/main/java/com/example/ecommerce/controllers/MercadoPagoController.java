@@ -35,14 +35,16 @@ public class MercadoPagoController {
          MercadoPagoConfig.setAccessToken(mercadoPagoAccessToken);
 
          List<PreferenceItemRequest> items = new ArrayList<>();
+
          OrderDetailDTO detallesOrden = ordenCompraService.crearOrdenCompra(carrito);
 
          List<DetalleOrdenCompra> detallesOrdenCompras = detallesOrden.getDetallesOrdenCompras();
-         List<Double> preciosDescuentos = detallesOrden.getPreciosDescuentos();
 
          for (DetalleOrdenCompra detalle : detallesOrdenCompras) {
             DetalleProducto detalleProducto = detalle.getDetalleProducto();
-            double precioFinal = preciosDescuentos.get(detallesOrdenCompras.indexOf(detalle));
+            double precioFinal = detalleProducto.isActivo()
+                  ? detalleProducto.getPrecioVenta() - detalleProducto.getDescuento().getPorcentaje()
+                  : detalleProducto.getPrecioVenta();
 
             PreferenceItemRequest item = PreferenceItemRequest.builder()
                   .id(detalle.getId().toString())
