@@ -1,11 +1,9 @@
 package com.example.ecommerce.controllers;
 
-import com.example.ecommerce.dto.UpdateUserDTO;
 import com.example.ecommerce.entities.Direccion;
 import com.example.ecommerce.entities.Localidad;
 import com.example.ecommerce.entities.Provincia;
 import com.example.ecommerce.entities.Usuario;
-import com.example.ecommerce.entities.enums.Rol;
 import com.example.ecommerce.repositories.DireccionRepository;
 import com.example.ecommerce.repositories.LocalidadRepository;
 import com.example.ecommerce.repositories.ProvinciaRepository;
@@ -17,8 +15,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Arrays;
 
 @RestController
 @RequestMapping("/api/v1/usuarios")
