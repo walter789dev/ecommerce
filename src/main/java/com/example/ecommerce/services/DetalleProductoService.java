@@ -55,4 +55,8 @@ public class DetalleProductoService extends BaseService<DetalleProducto, Long> {
    public List<DetalleProducto> getAllProductsFilter(DetalleProductoFiltroDTO filtro) {
       return detalleProductoRepository.findAll(DetalleProductoSpecification.filterDetalles(filtro));
    }
+
+   public List<DetalleProducto> getAllDetallesByProductoId(Long productoId) {
+      return detalleProductoRepository.findAllByProductoIdAndActivo(productoId);
+   }
 }

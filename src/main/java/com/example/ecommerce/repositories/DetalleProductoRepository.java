@@ -17,4 +17,7 @@ public interface DetalleProductoRepository extends BaseRepository<DetalleProduct
 
    @Query("SELECT dp FROM DetalleProducto dp WHERE dp.activo = true")
    List<DetalleProducto> findAllActive();
+
+   @Query("SELECT dp FROM DetalleProducto dp WHERE dp.producto.id = :id AND dp.activo = true")
+   List<DetalleProducto> findAllByProductoIdAndActivo(Long id);
 }
