@@ -57,7 +57,6 @@ public class AuthService {
       if (localidad == null) {
          localidad = Localidad.builder()
                .nombre(request.getLocalidad())
-               .codigoPostal(request.getCodigoPostal())
                .provincia(provincia)
                .build();
          localidadRepository.save(localidad);
@@ -76,7 +75,7 @@ public class AuthService {
             .dni(request.getDni())
             .username(request.getEmail())
             .password(passwordEncoder.encode(request.getPassword()))
-            .rol(Rol.USUARIO)
+            .rol(Rol.valueOf(request.getRol()))
             .direccion(direccion)
             .build();
 

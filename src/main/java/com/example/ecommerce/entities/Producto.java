@@ -31,4 +31,7 @@ public class Producto extends Base {
          inverseJoinColumns = @JoinColumn(name = "id_categoria")
    )
    private List<Categoria> categorias;
+
+   @Builder.Default
+   private boolean activo = true;
 }

@@ -5,6 +5,8 @@ import com.example.ecommerce.dto.DetalleProductoFiltroDTO;
 import com.example.ecommerce.entities.*;
 import com.example.ecommerce.entities.enums.Sexo;
 import com.example.ecommerce.entities.enums.TipoProducto;
+import com.example.ecommerce.repositories.DetalleProductoRepository;
+import com.example.ecommerce.repositories.ProductoRepository;
 import com.example.ecommerce.services.DetalleProductoService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,10 @@ public class DetalleProductoController extends BaseController<DetalleProducto, L
 
    @Autowired
    private DetalleProductoService detalleProductoService;
+   @Autowired
+   private DetalleProductoRepository detalleProductoRepository;
+   @Autowired
+   private ProductoRepository productoRepository;
 
    public DetalleProductoController(DetalleProductoService detalleService) {
       super(detalleService);
@@ -28,6 +34,16 @@ public class DetalleProductoController extends BaseController<DetalleProducto, L
    public ResponseEntity<List<DetalleColoresDTO>> getAllColoresByProductoId(@PathVariable Long productoId) {
       try {
          List<DetalleColoresDTO> detalles = detalleProductoService.getAllColoresByProductoId(productoId);
+         return ResponseEntity.ok(detalles);
+      } catch (EntityNotFoundException e) {
+         return ResponseEntity.notFound().build();
+      }
+   }
+
+   @GetMapping("/producto/{productoId}")
+   public ResponseEntity<List<DetalleProducto>> getAllDetallesByProductoId(@PathVariable Long productoId) {
+      try {
+         List<DetalleProducto> detalles = detalleProductoService.getAllDetallesByProductoId(productoId);
          return ResponseEntity.ok(detalles);
       } catch (EntityNotFoundException e) {
          return ResponseEntity.notFound().build();
@@ -55,5 +71,26 @@ public class DetalleProductoController extends BaseController<DetalleProducto, L
 
       List<DetalleProducto> resultados = detalleProductoService.getAllProductsFilter(filtro);
       return ResponseEntity.ok(resultados);
+   }
+
+   @DeleteMapping("/activate/{id}")
+   public ResponseEntity<Producto> activateDetailsByProductId(@PathVariable Long id) {
+      try {
+         Producto producto = productoRepository.findById(id).get();
+         boolean activate = producto.isActivo();
+
+         producto.setActivo(!activate);
+         productoRepository.save(producto);
+
+         List<DetalleProducto> detalleProductos = detalleProductoService.getAllDetallesByProductoId(id);
+         for (DetalleProducto detalleProducto : detalleProductos) {
+            detalleProducto.setActivo(!activate);
+            detalleProductoRepository.save(detalleProducto);
+         }
+
+         return ResponseEntity.ok(producto);
+      } catch (EntityNotFoundException e) {
+         throw new RuntimeException(e);
+      }
    }
 }

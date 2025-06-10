@@ -20,8 +20,6 @@ import java.util.List;
 @SpringBootApplication
 public class EcommerceApplication {
    @Autowired
-   private PaisRepository paisRepository;
-   @Autowired
    private ProvinciaRepository provinciaRepository;
    @Autowired
    private LocalidadRepository localidadRepository;
@@ -50,8 +48,7 @@ public class EcommerceApplication {
 
    @Bean
    @Transactional
-   CommandLineRunner init(PaisRepository paisRepository,
-                          ProvinciaRepository provinciaRepository,
+   CommandLineRunner init(ProvinciaRepository provinciaRepository,
                           LocalidadRepository localidadRepository,
                           DireccionRepository direccionRepository,
                           UsuarioRepository usuarioRepository,
@@ -66,20 +63,16 @@ public class EcommerceApplication {
                           DetalleOrdenCompraController detalleOrdenCompraController,
                           PasswordEncoder passwordEncoder) {
       return args -> {
-         // --------------- Paises ---------------- //
-         Pais argentina = Pais.builder().nombre("argentina").build();
-         paisRepository.save(argentina);
-
          // ------------- Provincias --------------- //
-         Provincia mendoza = Provincia.builder().nombre("mendoza").pais(argentina).build();
-         Provincia cordoba = Provincia.builder().nombre("cordoba").pais(argentina).build();
+         Provincia mendoza = Provincia.builder().nombre("mendoza").build();
+         Provincia cordoba = Provincia.builder().nombre("cordoba").build();
 
          provinciaRepository.save(mendoza);
          provinciaRepository.save(cordoba);
 
          // -------------- Localidades ---------------- //
-         Localidad lujan = Localidad.builder().nombre("lujan de cuyo").codigoPostal(5505).provincia(mendoza).build();
-         Localidad carlos_paz = Localidad.builder().nombre("carlos paz").codigoPostal(5152).provincia(cordoba).build();
+         Localidad lujan = Localidad.builder().nombre("lujan de cuyo").provincia(mendoza).build();
+         Localidad carlos_paz = Localidad.builder().nombre("carlos paz").provincia(cordoba).build();
 
          localidadRepository.save(lujan);
          localidadRepository.save(carlos_paz);

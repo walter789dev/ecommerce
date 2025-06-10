@@ -22,46 +22,47 @@ import java.util.List;
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfig {
-    private final JwtAuthenticationFilter jwtAuthenticationFilter;
-    private final AuthenticationProvider authProvider;
+   private final JwtAuthenticationFilter jwtAuthenticationFilter;
+   private final AuthenticationProvider authProvider;
 
-    // Endpoints públicos de los protegidos
-    @Bean
-    public SecurityFilterChain securityFilterChain (HttpSecurity http) throws Exception {
-        //1 - Medida de seguridad para POST, una autenticación de un token csfr válido.
-        //2 - Establece como publicas las rutas de auth, las demás requieren autenticación.
-        return http
-                .csrf(AbstractHttpConfigurer::disable)
-                .cors(cors -> cors.configurationSource(corsConfigurationSource())) // Habilita el uso de corsConfigurationSource()// 1
-                .authorizeHttpRequests(authRequest ->
-                        authRequest // 2
-                                .requestMatchers("/api/v1/auth/**").permitAll()
-                                // .requestMatchers("/api/v1/**").permitAll()
-                                 .requestMatchers(HttpMethod.GET,
-                                        "/api/v1/detalles_productos/**",
-                                         "/api/v1/categorias/**",
-                                         "/api/v1/talles/**",
-                                         "/api/v1/descuentos/**"
-                                      ).permitAll()
-                                .anyRequest().authenticated())
-                // Autenticación basada en jwt. No utilize la de Spring Security
-                .sessionManagement(sessionManager ->
-                        sessionManager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authenticationProvider(authProvider)
-                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
-                .build();
-    }
+   // Endpoints públicos de los protegidos
+   @Bean
+   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+      //1 - Medida de seguridad para POST, una autenticación de un token csfr válido.
+      //2 - Establece como publicas las rutas de auth, las demás requieren autenticación.
+      return http
+            .csrf(AbstractHttpConfigurer::disable)
+            .cors(cors -> cors.configurationSource(corsConfigurationSource())) // Habilita el uso de corsConfigurationSource()// 1
+            .authorizeHttpRequests(authRequest ->
+                  authRequest // 2
+                        .requestMatchers("/api/v1/auth/**").permitAll()
+                        // .requestMatchers("/api/v1/**").permitAll()
+                        .requestMatchers(HttpMethod.GET,
+                              "/api/v1/detalles_productos/**",
+                              "/api/v1/categorias/**",
+                              "/api/v1/talles/**",
+                              "/api/v1/descuentos/**",
+                              "/api/v1/localidades/**"
+                        ).permitAll()
+                        .anyRequest().authenticated())
+            // Autenticación basada en jwt. No utilize la de Spring Security
+            .sessionManagement(sessionManager ->
+                  sessionManager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+            .authenticationProvider(authProvider)
+            .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+            .build();
+   }
 
 
-     @Bean
-     CorsConfigurationSource corsConfigurationSource(){
-        CorsConfiguration configuration = new CorsConfiguration();
-            configuration.setAllowedOrigins(List.of("http://localhost:5173"));
-            configuration.addAllowedMethod("*");
-            configuration.addAllowedHeader("*");
+   @Bean
+   CorsConfigurationSource corsConfigurationSource() {
+      CorsConfiguration configuration = new CorsConfiguration();
+      configuration.setAllowedOrigins(List.of("https://localhost:5173"));
+      configuration.addAllowedMethod("*");
+      configuration.addAllowedHeader("*");
 
-            UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-            source.registerCorsConfiguration("/**",configuration);
-            return source;
-    }
+      UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+      source.registerCorsConfiguration("/**", configuration);
+      return source;
+   }
 }

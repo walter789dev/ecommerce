@@ -14,13 +14,10 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 public class DetalleOrdenCompra extends Base {
-    @ManyToOne
-    @JoinColumn(name = "id_detalleProducto")
-    private DetalleProducto detalleProducto;
+   @ManyToOne
+   @JoinColumn(name = "id_detalleProducto")
+   private DetalleProducto detalleProducto;
 
-    @ManyToOne
-    @JoinColumn(name = "id_ordenCompra")
-    private OrdenCompra ordenCompra;
-
-    private int cantidad;
+   private int cantidad;
+   private Talle talle;
 }

@@ -7,5 +7,7 @@ import java.util.List;
 
 @Repository
 public interface DireccionRepository extends BaseRepository<Direccion, Long> {
-    List<Direccion> findAllByLocalidadId(Long id);
+   List<Direccion> findAllByLocalidadId(Long id);
+
+   Direccion findByDomicilio(String domicilio);
 }

@@ -8,20 +8,12 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class ProvinciaService extends BaseService<Provincia, Long>{
+public class ProvinciaService extends BaseService<Provincia, Long> {
 
-    @Autowired
-    private ProvinciaRepository provinciaRepository;
+   @Autowired
+   private ProvinciaRepository provinciaRepository;
 
-    public ProvinciaService(ProvinciaRepository provinciaRepository){
-        super(provinciaRepository);
-    }
-
-    public List<Provincia> findAllByPais(Long idPais) throws Exception {
-        try {
-            return provinciaRepository.findAllByPaisId(idPais);
-        }catch (Exception e){
-            throw new Exception("No existen localidades del pais indicado", e);
-        }
-    }
+   public ProvinciaService(ProvinciaRepository provinciaRepository) {
+      super(provinciaRepository);
+   }
 }
