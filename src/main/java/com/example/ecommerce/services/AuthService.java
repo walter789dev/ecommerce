@@ -57,7 +57,6 @@ public class AuthService {
       if (localidad == null) {
          localidad = Localidad.builder()
                .nombre(request.getLocalidad())
-               .codigoPostal(request.getCodigoPostal())
                .provincia(provincia)
                .build();
          localidadRepository.save(localidad);

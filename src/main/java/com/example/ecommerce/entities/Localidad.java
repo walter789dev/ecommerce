@@ -10,11 +10,10 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Localidad extends Base{
-    private String nombre;
-    private int codigoPostal;
+public class Localidad extends Base {
+   private String nombre;
 
-    @ManyToOne
-    @JoinColumn(name = "id_provincia")
-    private Provincia provincia;
+   @ManyToOne
+   @JoinColumn(name = "id_provincia")
+   private Provincia provincia;
 }

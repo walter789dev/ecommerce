@@ -7,7 +7,5 @@ import java.util.List;
 
 @Repository
 public interface ProvinciaRepository extends BaseRepository<Provincia, Long> {
-   List<Provincia> findAllByPaisId(Long id);
-
    Provincia findByNombre(String provincia);
 }

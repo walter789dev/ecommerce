@@ -1,22 +1,22 @@
-package com.example.ecommerce.auth;
+package com.example.ecommerce.dto;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class RegisterRequest {
+public class UpdateUserDTO {
+   private Long id;
    private String nombre;
    private String apellido;
-   private String email;
+   private String username;
    private String password;
-   private String direccion;
+   private String domicilio;
+   private String dni;
    private String localidad;
    private String provincia;
-   private int dni;
    private String rol;
+   private boolean activo;
 }
