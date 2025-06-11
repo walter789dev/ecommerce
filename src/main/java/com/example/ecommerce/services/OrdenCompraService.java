@@ -30,6 +30,14 @@ public class OrdenCompraService extends BaseService<OrdenCompra, Long> {
       super(ordenCompraRepository);
    }
 
+   public OrdenCompra findByUsuarioId(Long id) {
+      try {
+         return ordenCompraRepository.findByUsuarioId(id);
+      } catch (Exception e) {
+         throw new RuntimeException("No se encontró la orden de compra");
+      }
+   }
+
    public OrderDetailDTO crearOrdenCompra(CarritoDTO carrito) throws Exception {
       List<DetalleOrdenCompra> productos = new ArrayList<>();
 

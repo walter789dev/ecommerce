@@ -388,72 +388,72 @@ public class EcommerceApplication {
 
          // ----------------------- Detalle Producto --------------- //
          DetalleProducto speedcat_negro = DetalleProducto.builder()
-               .color("Negro").activo(true).precioCompra(100000).precioVenta(120000)
+               .color("Negro").activo(true).precioCompra(1000).precioVenta(1200)
                .producto(producto1).descuento(descuento10)
                .imagenes(List.of(imagen1, imagen2)).build();
          DetalleProducto hello_kitty = DetalleProducto.builder()
-               .color("Negro").activo(true).precioCompra(130000).precioVenta(150000)
+               .color("Negro").activo(true).precioCompra(1300).precioVenta(1500)
                .producto(producto2).descuento(descuento10)
                .imagenes(List.of(imagen3, imagen4)).build();
          DetalleProducto buzo_wardrobe = DetalleProducto.builder()
-               .color("Negro").activo(true).precioCompra(140000).precioVenta(160000)
+               .color("Negro").activo(true).precioCompra(1400).precioVenta(1600)
                .producto(producto3).descuento(descuento5)
                .imagenes(List.of(imagen5, imagen6)).build();
          DetalleProducto campera_puffer = DetalleProducto.builder()
-               .color("Beige").activo(true).precioCompra(170000).precioVenta(180000)
+               .color("Beige").activo(true).precioCompra(1700).precioVenta(1800)
                .producto(producto4).descuento(descuento10)
                .imagenes(List.of(imagen7, imagen8)).build();
          DetalleProducto botines_future = DetalleProducto.builder()
-               .color("Amarillo").activo(true).precioCompra(190000).precioVenta(220000)
+               .color("Amarillo").activo(true).precioCompra(1900).precioVenta(2200)
                .producto(producto5).descuento(descuento10)
                .imagenes(List.of(imagen9, imagen10)).build();
 
          DetalleProducto ultraboost_negro = DetalleProducto.builder()
-               .color("Negro").activo(true).precioCompra(200000).precioVenta(220000)
+               .color("Negro").activo(true).precioCompra(2000).precioVenta(2200)
                .producto(product1).descuento(descuento20)
                .imagenes(List.of(imagen11, imagen12)).build();
          DetalleProducto ultraboost_verde = DetalleProducto.builder()
-               .color("Verde").activo(true).precioCompra(210000).precioVenta(230000)
+               .color("Verde").activo(true).precioCompra(2100).precioVenta(2300)
                .producto(product1).descuento(descuento20)
                .imagenes(List.of(imagen13, imagen14)).build();
          DetalleProducto ropa_mujer_negro = DetalleProducto.builder()
-               .color("Negro").activo(true).precioCompra(150000).precioVenta(170000)
+               .color("Negro").activo(true).precioCompra(1500).precioVenta(1700)
                .producto(product2).descuento(descuento15)
                .imagenes(List.of(imagen15, imagen16)).build();
          DetalleProducto ropa_mujer_rosa = DetalleProducto.builder()
-               .color("Rosa").activo(true).precioCompra(160000).precioVenta(180000)
+               .color("Rosa").activo(true).precioCompra(1600).precioVenta(1800)
                .producto(product2).descuento(descuento15)
                .imagenes(List.of(imagen17, imagen18)).build();
          DetalleProducto ropa_hombre_negro = DetalleProducto.builder()
-               .color("Negro").activo(true).precioCompra(170000).precioVenta(190000)
+               .color("Negro").activo(true).precioCompra(1700).precioVenta(1900)
                .producto(pumaRemeraHombre).descuento(descuento15)
                .imagenes(List.of(imagen19, imagen20)).build();
          DetalleProducto ropa_hombre_azul = DetalleProducto.builder()
-               .color("Azul").activo(true).precioCompra(180000).precioVenta(200000)
+               .color("Azul").activo(true).precioCompra(1800).precioVenta(2000)
                .producto(pumaRemeraHombre).descuento(descuento25)
                .imagenes(List.of(imagen21, imagen22)).build();
          DetalleProducto legging_mujer_negro = DetalleProducto.builder()
-               .color("Negro").activo(true).precioCompra(190000).precioVenta(210000)
+               .color("Negro").activo(true).precioCompra(1900).precioVenta(2100)
                .producto(pumaCalzasMujer).descuento(descuento15)
                .imagenes(List.of(imagen23, imagen24)).build();
          DetalleProducto leggings_mujer_rosa = DetalleProducto.builder()
-               .color("Marron").activo(true).precioCompra(200000).precioVenta(220000)
+               .color("Marron").activo(true).precioCompra(2000).precioVenta(2200)
                .producto(pumaCalzasMujer).descuento(descuento15)
                .imagenes(List.of(imagen25, imagen26)).build();
          DetalleProducto jacket_mujer_azul = DetalleProducto.builder()
-               .color("Azul").activo(true).precioCompra(210000).precioVenta(230000)
+               .color("Azul").activo(true).precioCompra(2100).precioVenta(2300)
                .producto(pumaCamperaHombre).descuento(descuento10)
                .imagenes(List.of(imagen27, imagen28)).build();
          DetalleProducto jacket_mujer_negro = DetalleProducto.builder()
-               .color("Verde").activo(true).precioCompra(220000).precioVenta(240000)
+               .color("Verde").activo(true).precioCompra(2200).precioVenta(2400)
                .producto(pumaCamperaHombre).descuento(descuento30)
                .imagenes(List.of(imagen29, imagen30)).build();
          DetalleProducto training_mujer_blanco = DetalleProducto.builder()
-               .color("Blanco").activo(true).precioCompra(230000).precioVenta(250000)
+               .color("Blanco").activo(true).precioCompra(2300).precioVenta(2500)
                .producto(pumaRemeraMujer2).descuento(descuento20)
                .imagenes(List.of(imagen31, imagen32)).build();
          DetalleProducto training_mujer_rosa = DetalleProducto.builder()
-               .color("Morado").activo(true).precioCompra(240000).precioVenta(260000)
+               .color("Morado").activo(true).precioCompra(2400).precioVenta(2600)
                .producto(pumaRemeraMujer2).descuento(descuento5)
                .imagenes(List.of(imagen33, imagen34)).build();
 

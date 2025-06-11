@@ -27,5 +27,5 @@ public class OrdenCompra extends Base {
    private double total;
 
    @Builder.Default
-   private Estado estado = Estado.PENDIENTE;
+   private Estado estado = Estado.APROBADO;
 }
