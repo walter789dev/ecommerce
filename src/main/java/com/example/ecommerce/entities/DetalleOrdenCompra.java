@@ -1,5 +1,6 @@
 package com.example.ecommerce.entities;
 
+import com.example.ecommerce.entities.enums.Estado;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;

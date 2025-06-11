@@ -59,9 +59,9 @@ public class MercadoPagoController {
 
          PreferenceBackUrlsRequest backUrls =
                PreferenceBackUrlsRequest.builder()
-                     .success("https://localhost:5173/paymentSuccess")
+                     .success("https://localhost:5173/pagoExitoso")
                      .pending("https://localhost:5173/")
-                     .failure("https://localhost:5173/paymentFailure")
+                     .failure("https://localhost:5173/pagoFracaso")
                      .build();
 
          List<PreferencePaymentTypeRequest> excludedPaymentTypes = new ArrayList<>();
@@ -72,16 +72,9 @@ public class MercadoPagoController {
                .installments(1)
                .build();
 
-         PreferencePayerRequest payer = PreferencePayerRequest.builder()
-               .name("TESTUSER")
-               .surname("TESTUSER")
-               .email("TESTUSER2015890025@testuser.com")
-               .build();
-
          PreferenceRequest preferenceRequest = PreferenceRequest.builder()
                .items(items)
                .backUrls(backUrls)
-               .payer(payer)
                .paymentMethods(paymentMethods)
                .autoReturn("approved")
                .build();

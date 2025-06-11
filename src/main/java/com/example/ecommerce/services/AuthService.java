@@ -34,8 +34,13 @@ public class AuthService {
 
    public AuthResponse login(LoginRequest request) {
       authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
-      UserDetails user = usuarioRepository.findByUsername(request.getUsername()).orElseThrow(
+      Usuario user = usuarioRepository.findByUsername(request.getUsername()).orElseThrow(
             () -> new UsernameNotFoundException("Usuario no encontrado - Modificado"));
+
+      if (!user.isActivo()) {
+         throw new UsernameNotFoundException("Usuario no activo");
+      }
+
       String token = jwtService.getToken(user);
       return AuthResponse.builder()
             .token(token)

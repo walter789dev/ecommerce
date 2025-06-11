@@ -208,7 +208,12 @@ public class EcommerceApplication {
                .fechaInicio(LocalDate.of(2025, 6, 1))
                .fechaFin(LocalDate.of(2025, 6, 26))
                .porcentaje(30).build();
+         Descuento descuento0 = Descuento.builder().nombre("Sin descuento")
+               .fechaInicio(LocalDate.of(2024, 5, 1))
+               .fechaFin(LocalDate.of(2024, 5, 25))
+               .porcentaje(0).build();
 
+         descuentoRepository.save(descuento0);
          descuentoRepository.save(descuento10);
          descuentoRepository.save(descuento5);
          descuentoRepository.save(descuento15);

@@ -1,5 +1,6 @@
 package com.example.ecommerce.entities;
 
+import com.example.ecommerce.entities.enums.Estado;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -24,4 +25,7 @@ public class OrdenCompra extends Base {
 
    private LocalDate fechaCompra;
    private double total;
+
+   @Builder.Default
+   private Estado estado = Estado.PENDIENTE;
 }
