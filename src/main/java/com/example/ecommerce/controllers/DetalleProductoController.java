@@ -85,6 +85,7 @@ public class DetalleProductoController extends BaseController<DetalleProducto, L
          List<DetalleProducto> detalleProductos = detalleProductoService.getAllDetallesByProductoId(id);
          for (DetalleProducto detalleProducto : detalleProductos) {
             detalleProducto.setActivo(!activate);
+            detalleProducto.setProducto(producto);
             detalleProductoRepository.save(detalleProducto);
          }
 

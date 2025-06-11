@@ -22,8 +22,7 @@ public class DetalleProductoService extends BaseService<DetalleProducto, Long> {
       super(detalleProductoRepository);
    }
 
-   @Override
-   public List<DetalleProducto> getAll() throws Exception {
+   public List<DetalleProducto> getAllDetailsActive() throws Exception {
       try {
          return detalleProductoRepository.findAllActive();
       } catch (Exception e) {
@@ -57,6 +56,6 @@ public class DetalleProductoService extends BaseService<DetalleProducto, Long> {
    }
 
    public List<DetalleProducto> getAllDetallesByProductoId(Long productoId) {
-      return detalleProductoRepository.findAllByProductoIdAndActivo(productoId);
+      return detalleProductoRepository.findAllByProductoId(productoId);
    }
 }

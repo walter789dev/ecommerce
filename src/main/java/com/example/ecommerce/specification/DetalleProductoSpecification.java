@@ -21,6 +21,10 @@ public class DetalleProductoSpecification {
       return (root, query, cb) -> {
          List<Predicate> predicates = new ArrayList<>();
 
+         if (filtro.isActivo()) {
+            predicates.add(cb.isTrue(root.get("activo")));
+         }
+
          if (filtro.getColor() != null) {
             predicates.add(cb.equal(root.get("color"), filtro.getColor()));
          }
